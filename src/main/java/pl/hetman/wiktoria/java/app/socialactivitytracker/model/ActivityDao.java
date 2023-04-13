@@ -93,6 +93,7 @@ public class ActivityDao implements Dao<ActivityModel> {
         }
 
     }
+    // TODO: 13.04.2023 dostosować dao do nowej kolumny id (już nie operujemy na kolumnie name tylko id)
 
     @Override
     public void delete(ActivityModel activityModel, String name) {

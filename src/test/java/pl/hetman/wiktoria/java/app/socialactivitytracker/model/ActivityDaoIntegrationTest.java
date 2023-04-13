@@ -45,5 +45,6 @@ class ActivityDaoIntegrationTest {
         //then
 
     }
+    // TODO: 13.04.2023 dookńczyć testy integracyjne dla metody update i delete (coś utworzyć zanim się zmodyfikuje itp) 
 
 }
