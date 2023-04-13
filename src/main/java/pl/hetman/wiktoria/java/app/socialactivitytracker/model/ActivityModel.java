@@ -5,6 +5,7 @@ import java.time.temporal.ChronoUnit;
 
 public class ActivityModel {
 
+    private Long id;
     private ActivityTypeModel activityType;
     LocalDateTime start;
     LocalDateTime stop;
@@ -60,6 +61,14 @@ public class ActivityModel {
         }
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public ActivityTypeModel getActivityType() {
         return activityType;
     }
@@ -87,9 +96,11 @@ public class ActivityModel {
     @Override
     public String toString() {
         return "ActivityModel{" +
-                "activityType=" + activityType +
+                "id=" + id +
+                ", activityType=" + activityType +
                 ", start=" + start +
                 ", stop=" + stop +
+                ", duration='" + duration + '\'' +
                 ", label='" + label + '\'' +
                 '}';
     }
@@ -98,12 +109,6 @@ public class ActivityModel {
 // TODO: 22.03.2023 na podstawie klasy activityModel storzyć tabele w bazie danych
 //  (wszystkie kolumny w typie varchar)
 
-//Do zmiany miejscie, w ktorym znajduje sie duration, stop start, bo wydaje sie, ze tu nie ma to sensu
-//w bazie danych powinny byc dwie tabele?
-//pierwsza np Activities gdzie bedzie NAME, CUSTOM < to dla programu, ktory ma liste wszystkich aktywnosci i wie
-//ktore sa wbudowane, a ktore uzytkownika
-//druga bedzie UserActivities gdzie ebdzie np. NAME, LABEL, START, STOP, DURATION < do ktorej ma dostep jedynie konkretny
-//uzytkownik z jego danymi?
 
 // dokończyć poprawić testy jednostkowe
 // dokończyć implementacje metody duration
