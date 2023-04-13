@@ -48,10 +48,7 @@ public class ActivityDao implements Dao<ActivityModel> {
     }
 
     @Override
-    public void update(ActivityModel activityModel, String oldName, String[] params) {
-
-        //ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        //String oldName = activityTypeModel.getName();
+    public void update(ActivityModel activityModel, String oldName) {
 
         String queryString = "UPDATE activitymodel " +
                 "SET name = ?," +
@@ -60,18 +57,32 @@ public class ActivityDao implements Dao<ActivityModel> {
                 "start = ?," +
                 "stop = ?," +
                 "duration = ?" +
-                "WHERE name = '" + oldName + "'";
+                "WHERE name = ?";
 
         try (Connection connection = ConnectionManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
-            if(activityModel!=null) {
-                preparedStatement.setString(1, activityModel.getActivityType().getName());
-                preparedStatement.setString(2, String.valueOf(activityModel.getActivityType().isCustom()));
+            if (activityModel != null) {
+                if (activityModel.getActivityType() != null) {
+                    preparedStatement.setString(1, activityModel.getActivityType().getName());
+                    preparedStatement.setString(2, String.valueOf(activityModel.getActivityType().isCustom()));
+                } else {
+                    preparedStatement.setString(1, null);
+                    preparedStatement.setString(2, null);
+                }
                 preparedStatement.setString(3, activityModel.getLabel());
-                preparedStatement.setString(4, activityModel.getStart().toString());
-                preparedStatement.setString(5, activityModel.getStop().toString());
+                if (activityModel.getStart() != null) {
+                    preparedStatement.setString(4, activityModel.getStart().toString());
+                } else {
+                    preparedStatement.setString(4, null);
+                }
+                if (activityModel.getStop() != null) {
+                    preparedStatement.setString(5, activityModel.getStop().toString());
+                } else {
+                    preparedStatement.setString(5, null);
+                }
                 preparedStatement.setString(6, activityModel.getDuration());
+                preparedStatement.setString(7, oldName);
                 preparedStatement.executeUpdate();
 
                 System.out.println("Data updated");
@@ -116,9 +127,9 @@ public class ActivityDao implements Dao<ActivityModel> {
 
             int columnNumber = rsmd.getColumnCount();
 
-            while (resultSet.next()){
+            while (resultSet.next()) {
 
-                for(int i = 1; i<=columnNumber; i++){
+                for (int i = 1; i <= columnNumber; i++) {
                     System.out.println(resultSet.getString(i));
                 }
 
