@@ -8,26 +8,34 @@ class ActivityDaoIntegrationTest {
     void update(){
         //given
 
+        //utworzona aktywność do zapisania
         ActivityDao activityDao = new ActivityDao();
-
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+
         activityTypeModel.setName("flying");
         activityTypeModel.setCustom(true);
 
         ActivityModel activityModel = new ActivityModel();
+
+        activityModel.setId(3L);
         activityModel.chooseActivityType(activityTypeModel);
         activityModel.begin();
         activityModel.end();
         String duration = activityModel.duration();
-        activityModel.setLabel("today flying");
+        activityModel.setLabel("today's flying");
 
-        String[] params = {activityTypeModel.getName(),
-                String.valueOf(activityTypeModel.isCustom()),
-                activityModel.getLabel(), null, null, null};
+        activityDao.save(activityModel);
+
+        //dane do modyfikacji
+        activityTypeModel.setName("running");
+        activityTypeModel.setCustom(true);
+        activityModel.setLabel("today's running");
+        activityModel.begin();
+        activityModel.end();
+        duration = activityModel.duration();
 
         //when
-
-        activityDao.update(activityModel, "bowling");
+        activityDao.update(activityModel);
 
         //then
 
@@ -36,11 +44,25 @@ class ActivityDaoIntegrationTest {
     @Test
     void delete(){
         //given
+        //utworzona aktywność do usunięcia
         ActivityModel activityModel = new ActivityModel();
         ActivityDao activityDao = new ActivityDao();
-        String name = "flying";
+        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+
+        activityTypeModel.setName("flying");
+        activityTypeModel.setCustom(true);
+
+        activityModel.setId(4L);
+        activityModel.chooseActivityType(activityTypeModel);
+        activityModel.begin();
+        activityModel.end();
+        String duration = activityModel.duration();
+        activityModel.setLabel("today's flying");
+
+        activityDao.save(activityModel);
+
         //when
-        activityDao.delete(activityModel, name);
+        activityDao.delete(activityModel);
 
         //then
 
