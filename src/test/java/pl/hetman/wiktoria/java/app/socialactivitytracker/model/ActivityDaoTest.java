@@ -14,12 +14,10 @@ class ActivityDaoTest {
         activityTypeModel.setCustom(false);
 
         ActivityModel activityModel = new ActivityModel();
-        //activityModel.setActivityType(activityTypeModel);
+        activityModel.setId(1L);
         activityModel.chooseActivityType(activityTypeModel);
-        //activityModel.setStart(LocalDateTime.now());
         activityModel.begin();
-        //activityModel.setStop(null);
-        activityModel.setLabel("today swimming");
+        activityModel.setLabel("today's swimming");
 
         //when
         activityDao.save(activityModel);
@@ -38,14 +36,12 @@ class ActivityDaoTest {
         activityTypeModel.setCustom(false);
 
         ActivityModel activityModel = new ActivityModel();
-        //activityModel.setActivityType(activityTypeModel);
+        activityModel.setId(2L);
         activityModel.chooseActivityType(activityTypeModel);
-        //activityModel.setStart(LocalDateTime.now());
         activityModel.begin();
-        //activityModel.setStop(null);
         activityModel.end();
         String duration = activityModel.duration();
-        activityModel.setLabel("today running");
+        activityModel.setLabel("today's running");
 
         //when
         activityDao.save(activityModel);
@@ -57,7 +53,6 @@ class ActivityDaoTest {
     @Test
     void update(){
         //given
-
         ActivityDao activityDao = new ActivityDao();
 
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
@@ -65,19 +60,15 @@ class ActivityDaoTest {
         activityTypeModel.setCustom(true);
 
         ActivityModel activityModel = new ActivityModel();
+        activityModel.setId(1L);
         activityModel.chooseActivityType(activityTypeModel);
         activityModel.begin();
         activityModel.end();
         String duration = activityModel.duration();
-        activityModel.setLabel("today flying");
-
-        String[] params = {activityTypeModel.getName(),
-                String.valueOf(activityTypeModel.isCustom()),
-                activityModel.getLabel(), null, null, null};
+        activityModel.setLabel("today's flying");
 
         //when
-
-        activityDao.update(activityModel, "bowling");
+        activityDao.update(activityModel);
 
         //then
 
@@ -88,9 +79,9 @@ class ActivityDaoTest {
         //given
         ActivityModel activityModel = new ActivityModel();
         ActivityDao activityDao = new ActivityDao();
-        String name = "flying";
+        activityModel.setId(1L);
         //when
-        activityDao.delete(activityModel, name);
+        activityDao.delete(activityModel);
 
         //then
 
@@ -101,10 +92,10 @@ class ActivityDaoTest {
         //given
         ActivityModel activityModel = new ActivityModel();
         ActivityDao activityDao = new ActivityDao();
-        String name = "running";
+        activityModel.setId(2L);
 
         //when
-        activityDao.read(activityModel, name);
+        activityDao.read(activityModel);
 
         //then
 

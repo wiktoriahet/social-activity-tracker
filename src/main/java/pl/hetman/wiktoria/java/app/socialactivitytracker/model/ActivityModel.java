@@ -105,24 +105,3 @@ public class ActivityModel {
                 '}';
     }
 }
-
-// TODO: 22.03.2023 na podstawie klasy activityModel storzyć tabele w bazie danych
-//  (wszystkie kolumny w typie varchar)
-
-
-// dokończyć poprawić testy jednostkowe
-// dokończyć implementacje metody duration
-// (opcjonalnie) napisać klasę DAO z wykorzystaniem jdbc, która zapisze
-// activityModel do nowo utworzonej tabeli
-// 
-/*
-CREATE TABLE TEST(
-    ID INT PRIMARY KEY,
-    NAME VARCHAR(255)
-);
-
-public class Test{
-    int id;
-    String name;
-};
- */
