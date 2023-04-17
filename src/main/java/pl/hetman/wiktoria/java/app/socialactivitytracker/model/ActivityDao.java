@@ -7,7 +7,6 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class ActivityDao implements Dao<ActivityModel> {
-    // TODO: 06.04.2023 dokonczyc implementacje actDao, delete i update + read
 
     @Override
     public void save(ActivityModel activityModel) {
@@ -94,7 +93,7 @@ public class ActivityDao implements Dao<ActivityModel> {
         }
 
     }
-    // TODO: 13.04.2023 dostosować dao do nowej kolumny id (już nie operujemy na kolumnie name tylko id)
+    // TODO: 13.04.2023 dostosować dao do nowej kolumny id (już nie operujemy na kolumnie name tylko id) [x]
 
     @Override
     public void delete(ActivityModel activityModel) {
