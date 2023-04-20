@@ -12,18 +12,27 @@ public class ActivityDao implements Dao<ActivityModel> {
     public void save(ActivityModel activityModel) {
         //Connection connection = null;
         //PreparedStatement preparedStatement = null;
-        String queryString = "INSERT INTO activitymodel" +
+        String queryString = "INSERT INTO ACTIVITIES" +
                 "(id, name, custom, label, start, stop, duration)" +
                 " VALUES(?,?,?,?,?,?,?)";
         try (Connection connection = ConnectionManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queryString);) {
             //try-with-resource
 
-            preparedStatement.setString(1, activityModel.getId().toString());
-            preparedStatement.setString(2, activityModel.getActivityType().getName());
-            preparedStatement.setString(3, String.valueOf(activityModel.getActivityType().isCustom()));
+            preparedStatement.setLong(1, activityModel.getId());
+            if(activityModel.getActivityType() !=null) {
+                preparedStatement.setString(2, activityModel.getActivityType().getName());
+                preparedStatement.setString(3, String.valueOf(activityModel.getActivityType().isCustom()));
+            } else {
+                preparedStatement.setString(2, null);
+                preparedStatement.setString(3, null);
+            }
             preparedStatement.setString(4, activityModel.getLabel());
-            preparedStatement.setString(5, activityModel.getStart().toString());
+            if(activityModel.getStart() !=null) {
+                preparedStatement.setString(5, activityModel.getStart().toString());
+            } else {
+                preparedStatement.setString(5, null);
+            }
             preparedStatement.setString(6, null);
             preparedStatement.setString(7, activityModel.getDuration());
             preparedStatement.executeUpdate();
@@ -50,7 +59,7 @@ public class ActivityDao implements Dao<ActivityModel> {
     @Override
     public void update(ActivityModel activityModel) {
 
-        String queryString = "UPDATE activitymodel " +
+        String queryString = "UPDATE ACTIVITIES " +
                 "SET name = ?," +
                 "custom = ?," +
                 "label = ?," +
@@ -82,7 +91,7 @@ public class ActivityDao implements Dao<ActivityModel> {
                     preparedStatement.setString(5, null);
                 }
                 preparedStatement.setString(6, activityModel.getDuration());
-                preparedStatement.setString(7, activityModel.getId().toString());
+                preparedStatement.setLong(7, activityModel.getId());
                 preparedStatement.executeUpdate();
 
                 System.out.println("Data updated");
@@ -97,13 +106,13 @@ public class ActivityDao implements Dao<ActivityModel> {
 
     @Override
     public void delete(ActivityModel activityModel) {
-        String queryString = "DELETE activitymodel " +
+        String queryString = "DELETE ACTIVITIES " +
                 "WHERE id = ?";
 
         try (Connection connection = ConnectionManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
-            preparedStatement.setString(1, activityModel.getId().toString());
+            preparedStatement.setLong(1, activityModel.getId());
             preparedStatement.executeUpdate();
 
             System.out.println("Data deleted");
@@ -115,32 +124,32 @@ public class ActivityDao implements Dao<ActivityModel> {
     }
 
     @Override
-    public void read(ActivityModel activityModel) {
-
-
-        String queryString = "SELECT * FROM activitymodel WHERE id = ?";
+    public ActivityModel read(Long id) {
+        String queryString = "SELECT * FROM ACTIVITIES WHERE id = ?;";
 
         try (Connection connection = ConnectionManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
-            preparedStatement.setString(1, activityModel.getId().toString());
-            ResultSet resultSet = null;
-            resultSet = preparedStatement.executeQuery();
-            ResultSetMetaData rsmd = resultSet.getMetaData();
+            preparedStatement.setLong(1, id);
+            ResultSet resultSet = preparedStatement.executeQuery();
 
-            int columnNumber = rsmd.getColumnCount();
+            if (resultSet.next()) {
+                Long readId = resultSet.getLong("ID");
+                String name = resultSet.getString("NAME");
+                String custom = resultSet.getString("CUSTOM");
+                String label = resultSet.getString("LABEL");
 
-            while (resultSet.next()) {
+                ActivityModel activityModel = new ActivityModel();
+                activityModel.setId(readId);
+                activityModel.setLabel(label);
 
-                for (int i = 1; i <= columnNumber; i++) {
-                    System.out.println(resultSet.getString(i));
-                }
-
+                return activityModel;
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return null;
 
     }
 }

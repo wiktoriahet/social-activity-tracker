@@ -90,12 +90,10 @@ class ActivityDaoTest {
     @Test
     void read(){
         //given
-        ActivityModel activityModel = new ActivityModel();
         ActivityDao activityDao = new ActivityDao();
-        activityModel.setId(2L);
 
         //when
-        activityDao.read(activityModel);
+        ActivityModel activityModel = activityDao.read(2L);
 
         //then
 

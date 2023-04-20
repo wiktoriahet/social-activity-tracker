@@ -8,6 +8,6 @@ public interface Dao<T> {
 
     void delete(T t);
 
-    void read(T t);
+    T read(Long id);
 
 }
