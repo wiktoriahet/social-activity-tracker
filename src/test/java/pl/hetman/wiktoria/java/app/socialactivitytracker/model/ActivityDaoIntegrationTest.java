@@ -2,6 +2,7 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao.UniqueIdGenerator;
 
 class ActivityDaoIntegrationTest {
 
@@ -25,17 +26,17 @@ class ActivityDaoIntegrationTest {
         //given
         ActivityDao activityDao = new ActivityDao();
         ActivityModel activityModel = new ActivityModel();
-        activityModel.setId(ACTIVITY_MODEL_ID_55);
-        activityModel.setLabel("flying");
+        activityModel.setLabel("today's jumping");
+        activityModel.setId(UniqueIdGenerator.generateId());
 
         //when
 
         activityDao.save(activityModel);
-        ActivityModel readActivityModel = activityDao.read(ACTIVITY_MODEL_ID_55);
+        ActivityModel readActivityModel = activityDao.read(activityModel.getId());
+        System.out.println(readActivityModel);
 
         //then
         Assertions.assertNotNull(readActivityModel, "activityModel is null");
-
     }
 
     @Test
