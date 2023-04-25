@@ -2,7 +2,7 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
 
 public interface Dao<T> {
 
-    void save(T t);
+    T save(T t);
 
     void update(T t);
 

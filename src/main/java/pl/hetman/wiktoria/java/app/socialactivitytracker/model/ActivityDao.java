@@ -1,5 +1,7 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
 
+import pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao.UniqueIdGenerator;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,9 +9,11 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 public class ActivityDao implements Dao<ActivityModel> {
-
+    // TODO: 20.04.2023 zmodyfikować metodę save tak aby zwracała activityModel z unikalnym wygenerowanym identyfiktorem [x]
+    // zmodyfikować testy integracyjne metoda createandread tak aby nie podawać id przy create [x]
+    //https://docs.oracle.com/javase/tutorial/essential/environment/properties.html
     @Override
-    public void save(ActivityModel activityModel) {
+    public ActivityModel save(ActivityModel activityModel) {
         //Connection connection = null;
         //PreparedStatement preparedStatement = null;
         String queryString = "INSERT INTO ACTIVITIES" +
@@ -19,6 +23,7 @@ public class ActivityDao implements Dao<ActivityModel> {
              PreparedStatement preparedStatement = connection.prepareStatement(queryString);) {
             //try-with-resource
 
+            //preparedStatement.setLong(1, UniqueIdGenerator.generateId());
             preparedStatement.setLong(1, activityModel.getId());
             if(activityModel.getActivityType() !=null) {
                 preparedStatement.setString(2, activityModel.getActivityType().getName());
@@ -40,20 +45,7 @@ public class ActivityDao implements Dao<ActivityModel> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        finally {
-//            try {
-//                if (preparedStatement != null) {
-//                    preparedStatement.close();
-//                }
-//                if (connection != null) {
-//                    connection.close();
-//                }
-//            } catch (SQLException e) {
-//                e.printStackTrace();
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-
+        return activityModel;
     }
 
     @Override
@@ -102,7 +94,6 @@ public class ActivityDao implements Dao<ActivityModel> {
         }
 
     }
-    // TODO: 13.04.2023 dostosować dao do nowej kolumny id (już nie operujemy na kolumnie name tylko id) [x]
 
     @Override
     public void delete(ActivityModel activityModel) {
