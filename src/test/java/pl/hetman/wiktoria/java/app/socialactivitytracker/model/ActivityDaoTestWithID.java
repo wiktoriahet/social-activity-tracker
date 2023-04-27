@@ -19,7 +19,7 @@ class ActivityDaoTestWithID {
 
         ActivityModel activityModel = new ActivityModel();
 
-        activityModel.setId(UniqueIdGenerator.generateId());
+        //activityModel.setId(UniqueIdGenerator.generateId());
         activityModel.chooseActivityType(activityTypeModel);
         activityModel.begin();
         activityModel.end();
@@ -27,9 +27,13 @@ class ActivityDaoTestWithID {
         activityModel.setLabel("today's reading");
 
         //when
-        activityDao.save(activityModel);
+        ActivityModel savedActivityModel = activityDao.save(activityModel);
 
         //then
-        Assertions.assertNotNull(activityModel, "activityModel is Null");
+
+        Assertions.assertAll(
+                ()->Assertions.assertNotNull(savedActivityModel, "activityModel is Null"),
+                ()->Assertions.assertNotNull(savedActivityModel.getId(), "ID is Null")
+        );
     }
 }

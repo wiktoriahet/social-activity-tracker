@@ -19,12 +19,12 @@ public class ActivityDao implements Dao<ActivityModel> {
         String queryString = "INSERT INTO ACTIVITIES" +
                 "(id, name, custom, label, start, stop, duration)" +
                 " VALUES(?,?,?,?,?,?,?)";
+        Long generatedId = UniqueIdGenerator.generateId();
         try (Connection connection = ConnectionManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queryString);) {
             //try-with-resource
 
-            //preparedStatement.setLong(1, UniqueIdGenerator.generateId());
-            preparedStatement.setLong(1, activityModel.getId());
+            preparedStatement.setLong(1, generatedId);
             if(activityModel.getActivityType() !=null) {
                 preparedStatement.setString(2, activityModel.getActivityType().getName());
                 preparedStatement.setString(3, String.valueOf(activityModel.getActivityType().isCustom()));
@@ -45,6 +45,7 @@ public class ActivityDao implements Dao<ActivityModel> {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        activityModel.setId(generatedId);
         return activityModel;
     }
 

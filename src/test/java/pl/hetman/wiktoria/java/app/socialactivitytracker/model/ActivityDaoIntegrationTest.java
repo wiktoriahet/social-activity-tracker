@@ -7,6 +7,7 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao.UniqueIdGener
 class ActivityDaoIntegrationTest {
 
     public static final long ACTIVITY_MODEL_ID_55 = 55L;
+    public static final String ACTIVITY_MODEL_LABEL_JUMP = "today's jumping";
 
     @Test
     void read(){
@@ -26,17 +27,20 @@ class ActivityDaoIntegrationTest {
         //given
         ActivityDao activityDao = new ActivityDao();
         ActivityModel activityModel = new ActivityModel();
-        activityModel.setLabel("today's jumping");
-        activityModel.setId(UniqueIdGenerator.generateId());
+        activityModel.setLabel(ACTIVITY_MODEL_LABEL_JUMP);
+        //activityModel.setId(UniqueIdGenerator.generateId());
 
         //when
 
-        activityDao.save(activityModel);
-        ActivityModel readActivityModel = activityDao.read(activityModel.getId());
+        ActivityModel savedActivityModel = activityDao.save(activityModel);
+        ActivityModel readActivityModel = activityDao.read(savedActivityModel.getId());
         System.out.println(readActivityModel);
 
         //then
-        Assertions.assertNotNull(readActivityModel, "activityModel is null");
+        Assertions.assertAll(
+                ()->Assertions.assertNotNull(readActivityModel, "activityModel is null"),
+                ()->Assertions.assertEquals(ACTIVITY_MODEL_LABEL_JUMP, readActivityModel.getLabel(), "Label not equals")
+        );
     }
 
     @Test
@@ -101,6 +105,5 @@ class ActivityDaoIntegrationTest {
 
         //then
     }
-    // TODO: 13.04.2023 dookńczyć testy integracyjne dla metody update i delete (coś utworzyć zanim się zmodyfikuje itp) 
 
 }
