@@ -1,12 +1,27 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao;
+
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Properties;
 
-public class CredentialsProperties{
+public class CredentialsProperties {
 
-    public void getProperty(){
+    public String getProperty(String key) {
         Properties properties = new Properties();
+        InputStream inputStream = Thread.currentThread()
+                .getContextClassLoader()
+                .getResourceAsStream("credentials.properties");
+
+        try {
+            properties.load(inputStream);
+            String property = properties.getProperty(key);
+            return property;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     public void setUp() throws IOException {
