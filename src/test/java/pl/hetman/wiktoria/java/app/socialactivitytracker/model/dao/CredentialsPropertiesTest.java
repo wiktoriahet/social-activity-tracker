@@ -25,7 +25,5 @@ class CredentialsPropertiesTest {
                 ()-> Assertions.assertNotNull(property, "property is null"),
                 ()-> Assertions.assertEquals(value, property, "property not equals")
         );
-
-
     }
 }
