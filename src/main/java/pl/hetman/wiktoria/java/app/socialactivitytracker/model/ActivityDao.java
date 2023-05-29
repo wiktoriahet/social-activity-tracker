@@ -1,5 +1,6 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
 
+import pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao.CredentialsProperties;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao.UniqueIdGenerator;
 
 import java.sql.Connection;
@@ -8,11 +9,17 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 public class ActivityDao implements Dao<ActivityModel> {
 
+    private static final Logger LOGGER = Logger.getLogger(ActivityDao.class.getName());
+
     @Override
     public Optional<ActivityModel> save(ActivityModel activityModel) {
+
+        LOGGER.info("save(" + activityModel + ")");
+
         //Connection connection = null;
         //PreparedStatement preparedStatement = null;
         String queryString = "INSERT INTO ACTIVITIES" +
@@ -24,7 +31,7 @@ public class ActivityDao implements Dao<ActivityModel> {
             //try-with-resource
 
             preparedStatement.setLong(1, generatedId);
-            if(activityModel.getActivityType() !=null) {
+            if (activityModel.getActivityType() != null) {
                 preparedStatement.setString(2, activityModel.getActivityType().getName());
                 preparedStatement.setString(3, String.valueOf(activityModel.getActivityType().isCustom()));
             } else {
@@ -32,7 +39,7 @@ public class ActivityDao implements Dao<ActivityModel> {
                 preparedStatement.setString(3, null);
             }
             preparedStatement.setString(4, activityModel.getLabel());
-            if(activityModel.getStart() !=null) {
+            if (activityModel.getStart() != null) {
                 preparedStatement.setString(5, activityModel.getStart().toString());
             } else {
                 preparedStatement.setString(5, null);
@@ -40,11 +47,12 @@ public class ActivityDao implements Dao<ActivityModel> {
             preparedStatement.setString(6, null);
             preparedStatement.setString(7, activityModel.getDuration());
             preparedStatement.executeUpdate();
-            System.out.println("Data saved");
+            //System.out.println("Data saved"); todo mozna usunac, bo jest logger?
         } catch (SQLException e) {
             e.printStackTrace();
         }
         activityModel.setId(generatedId);
+        LOGGER.info("save(...)");
         return Optional.of(activityModel);
     }
 //    @Override
@@ -87,6 +95,8 @@ public class ActivityDao implements Dao<ActivityModel> {
     @Override
     public void update(ActivityModel activityModel) {
 
+        LOGGER.info("update(" + activityModel + ")");
+
         String queryString = "UPDATE ACTIVITIES " +
                 "SET name = ?," +
                 "custom = ?," +
@@ -122,17 +132,21 @@ public class ActivityDao implements Dao<ActivityModel> {
                 preparedStatement.setLong(7, activityModel.getId());
                 preparedStatement.executeUpdate();
 
-                System.out.println("Data updated");
+                //System.out.println("Data updated"); todo tu tez bo logger?
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        LOGGER.info("update(...)");
     }
 
     @Override
     public void delete(ActivityModel activityModel) {
+
+        LOGGER.info("delete("+activityModel+")");
+
         String queryString = "DELETE ACTIVITIES " +
                 "WHERE id = ?";
 
@@ -142,16 +156,21 @@ public class ActivityDao implements Dao<ActivityModel> {
             preparedStatement.setLong(1, activityModel.getId());
             preparedStatement.executeUpdate();
 
-            System.out.println("Data deleted");
+            //System.out.println("Data deleted");
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
+        LOGGER.info("delete(...)");
+
     }
 
     @Override
     public Optional<ActivityModel> read(Long id) {
+
+        LOGGER.info("read("+id+")");
+
         String queryString = "SELECT * FROM ACTIVITIES WHERE id = ?;";
 
         try (Connection connection = ConnectionManager.getInstance().getConnection();
@@ -170,12 +189,15 @@ public class ActivityDao implements Dao<ActivityModel> {
                 activityModel.setId(readId);
                 activityModel.setLabel(label);
 
+                LOGGER.info("read(...)");
+
                 return Optional.of(activityModel);
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        LOGGER.info("read(...)");
         return Optional.empty();
 
     }

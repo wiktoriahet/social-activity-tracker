@@ -2,8 +2,12 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.logging.Logger;
 
 public class ActivityModel {
+
+    private static final Logger LOGGER = Logger.getLogger(ActivityModel.class.getName());
+
 
     private Long id;
     private ActivityTypeModel activityType;
@@ -13,21 +17,29 @@ public class ActivityModel {
     private String label;
 
     public void chooseActivityType(ActivityTypeModel activityType) {
-        System.out.println("chooseActivityType(" + activityType + ")");
+        LOGGER.info("chooseActivityType("+activityType+")");
+        //System.out.println("chooseActivityType(" + activityType + ")");
         this.activityType = activityType;
+        LOGGER.info("chooseActivityType(...)");
     }
 
     public void begin() {
-        System.out.println("begin()");
+        LOGGER.info("begin()");
+        //System.out.println("begin()");
         this.start = LocalDateTime.now();
+        LOGGER.info("begin(...)");
     }
 
     public void end() {
-        System.out.println("stop()");
+        LOGGER.info("end()");
+        //System.out.println("stop()");
         this.stop = LocalDateTime.now();
+        LOGGER.info("end(...)");
     }
 
     public String duration() {
+
+        LOGGER.info("duration()");
 
         if (this.start != null && this.stop != null) {
 
@@ -55,11 +67,15 @@ public class ActivityModel {
 
             this.duration = duration;
 
+            LOGGER.info("duration(...)");
             return duration;
         } else {
+            LOGGER.info("duration(...)"); // TODO: 29.05.2023 czy jak gdzieś jest zwracany null, to w loggerze wpisujemy tego nulla
             return null;
         }
     }
+
+    // TODO: 29.05.2023 czy gettery i settery też mają loggery?
 
     public Long getId() {
         return id;
