@@ -6,7 +6,8 @@ public class ActivityTypeModel {
     private String name;
     private boolean custom;
 
-    // TODO: 25.04.2023 nie korzystam z tego id ani razu, korzystam z id w actModel
+// TODO: 01.05.2023 nie korzystam z tego id ani razu, korzystam z id w actModel
+
 //    public Long getId() {
 //        return id;
 //    }

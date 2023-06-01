@@ -52,8 +52,9 @@ public class ActivityDao implements Dao<ActivityModel> {
             e.printStackTrace();
         }
         activityModel.setId(generatedId);
-        LOGGER.info("save(...)");
-        return Optional.of(activityModel);
+        Optional<ActivityModel> optionalActivityModel = Optional.of(activityModel);
+        LOGGER.info("save(...)=" + optionalActivityModel);
+        return optionalActivityModel;
     }
 //    @Override
 //    public ActivityModel save(ActivityModel activityModel) {

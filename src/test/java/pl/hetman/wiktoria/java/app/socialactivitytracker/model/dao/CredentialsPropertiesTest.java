@@ -7,23 +7,24 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class CredentialsPropertiesTest {
 
+    public static final String KEY = "database";
+    public static final String VALUE = "jdbc:h2:~/test";
+
     @Test
     void getProperty() {
         //given
         CredentialsProperties credentialsProperties = new CredentialsProperties();
-        String key = "database";
-        String value = "jdbc:h2:~/test";
 
         // TODO: 18.05.2023 przenieść key value do stałych
 
         //when
-        String property = credentialsProperties.getProperty(key);
+        String property = credentialsProperties.getProperty(KEY);
 
         //then
         //Assertions.assertNotNull(property, "Property is null");
         Assertions.assertAll(
                 ()-> Assertions.assertNotNull(property, "property is null"),
-                ()-> Assertions.assertEquals(value, property, "property not equals")
+                ()-> Assertions.assertEquals(VALUE, property, "property not equals")
         );
     }
 }
