@@ -1,6 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
-
-import pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao.CredentialsProperties;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

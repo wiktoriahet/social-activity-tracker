@@ -1,11 +1,5 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao.UniqueIdGenerator;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 class ActivityDaoTestWithID {
 
 //    @Test

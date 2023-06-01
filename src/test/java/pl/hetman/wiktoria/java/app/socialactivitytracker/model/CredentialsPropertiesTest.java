@@ -1,7 +1,7 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
 
 import org.junit.jupiter.api.Test;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao.CredentialsProperties;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.CredentialsProperties;
 
 import java.io.IOException;
 
