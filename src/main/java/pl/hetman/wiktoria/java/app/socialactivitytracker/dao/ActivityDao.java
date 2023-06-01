@@ -1,6 +1,6 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
-import pl.hetman.wiktoria.java.app.socialactivitytracker.model.ActivityModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
