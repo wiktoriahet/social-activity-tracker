@@ -1,7 +1,8 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 
 import java.time.LocalDateTime;
 import java.time.Month;

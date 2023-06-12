@@ -1,4 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;

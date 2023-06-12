@@ -1,12 +1,10 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
-import pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao.CredentialsProperties;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.model.dao.UniqueIdGenerator;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.logging.Logger;

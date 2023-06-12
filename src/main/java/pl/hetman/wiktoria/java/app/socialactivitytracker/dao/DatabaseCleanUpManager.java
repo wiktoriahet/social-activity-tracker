@@ -1,4 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.model;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
