@@ -70,12 +70,10 @@ public class ActivityModel {
             LOGGER.info("duration(...)");
             return duration;
         } else {
-            LOGGER.info("duration(...)"); // TODO: 29.05.2023 czy jak gdzieś jest zwracany null, to w loggerze wpisujemy tego nulla
+            LOGGER.info("duration(...)");
             return null;
         }
     }
-
-    // TODO: 29.05.2023 czy gettery i settery też mają loggery?
 
     public Long getId() {
         return id;

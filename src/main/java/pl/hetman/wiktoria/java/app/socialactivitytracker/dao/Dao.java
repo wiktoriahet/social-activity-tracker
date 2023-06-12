@@ -12,4 +12,6 @@ public interface Dao<T> {
 
     Optional<T> read(Long id);
 
+    void list(T t);
+
 }
