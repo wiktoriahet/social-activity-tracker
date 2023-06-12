@@ -200,4 +200,11 @@ public class ActivityDao implements Dao<ActivityModel> {
         return Optional.empty();
 
     }
+
+    // TODO: 12.06.2023 dorobić
+    @Override
+    public void list(ActivityModel activityModel) {
+        LOGGER.info("list(" + activityModel + ")");
+        LOGGER.info("list(...)");
+    }
 }

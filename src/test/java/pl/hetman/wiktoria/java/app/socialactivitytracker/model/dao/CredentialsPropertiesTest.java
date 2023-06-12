@@ -14,8 +14,6 @@ class CredentialsPropertiesTest {
         //given
         CredentialsProperties credentialsProperties = new CredentialsProperties();
 
-        // TODO: 18.05.2023 przenieść key value do stałych
-
         //when
         String property = credentialsProperties.getProperty(KEY);
 
