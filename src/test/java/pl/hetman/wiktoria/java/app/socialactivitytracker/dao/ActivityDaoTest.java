@@ -89,17 +89,4 @@ class ActivityDaoTest {
         //then
 
     }
-
-//    @Test
-//    void read(){
-//        //given
-//        ActivityDao activityDao = new ActivityDao();
-//
-//        //when
-//        ActivityModel activityModel = activityDao.read(2L);
-//
-//        //then
-//
-//    }
-
 }

@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 public class ConnectionManager {
-    // TODO: 29.05.2023 tu tez loggery, czy sa potrzebne bo dziwnie wygladaja
     private static final Logger LOGGER = Logger.getLogger(ConnectionManager.class.getName());
 
     String driverClassName = "org.h2.Driver";

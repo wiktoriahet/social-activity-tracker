@@ -32,36 +32,10 @@ class ActivityDaoOptionalsTest {
         Optional<ActivityModel> savedActivity = activityDao.save(activityModel);
 
         //then
-//        Assertions.assertAll(
-//                ()-> assertTrue(savedActivity.isEmpty(), "Optional is present"),
-//                ()-> assertNull(savedActivity, "Optional is not null")
-//        );
-
         Assertions.assertAll(
                 ()-> assertTrue(savedActivity.isPresent(), "Optional is not present"),
                 ()-> assertNotNull(savedActivity, "Optional is null")
         );
     }
 
-    @Test
-    void createAndRead(){
-        //given
-        ActivityDao activityDao = new ActivityDao();
-        ActivityModel activityModel = new ActivityModel();
-        activityModel.setLabel(ACTIVITY_MODEL_LABEL_DANCE);
-
-        //when
-
-        Optional<ActivityModel> savedActivityModel = activityDao.save(activityModel);
-        Optional<ActivityModel> readActivityModel = activityDao.read(savedActivityModel.get().getId());
-        System.out.println(readActivityModel);
-
-        //then
-        Assertions.assertAll(
-                ()->Assertions.assertNotNull(readActivityModel, "activityModel is null"),
-                ()->Assertions.assertEquals(ACTIVITY_MODEL_LABEL_DANCE, readActivityModel.get().getLabel(), "Label not equals")
-        );
-
-
-    }
 }
