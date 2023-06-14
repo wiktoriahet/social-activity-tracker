@@ -5,8 +5,6 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.DatabaseCleanUpMana
 
 class DatabaseCleanUpManagerTest {
 
-    // TODO: 28.05.2023 truncate table test
-
     @Test
     void deleteTable() {
         //given

@@ -45,7 +45,6 @@ public class ActivityDao implements Dao<ActivityModel> {
             preparedStatement.setString(6, null);
             preparedStatement.setString(7, activityModel.getDuration());
             preparedStatement.executeUpdate();
-            //System.out.println("Data saved"); todo mozna usunac, bo jest logger?
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -130,8 +129,6 @@ public class ActivityDao implements Dao<ActivityModel> {
                 preparedStatement.setString(6, activityModel.getDuration());
                 preparedStatement.setLong(7, activityModel.getId());
                 preparedStatement.executeUpdate();
-
-                //System.out.println("Data updated"); todo tu tez bo logger?
             }
 
         } catch (SQLException e) {
@@ -201,7 +198,7 @@ public class ActivityDao implements Dao<ActivityModel> {
 
     }
 
-    // TODO: 12.06.2023 dorobić
+    // TODO: 12.06.2023 dorobić?
     @Override
     public void list(ActivityModel activityModel) {
         LOGGER.info("list(" + activityModel + ")");

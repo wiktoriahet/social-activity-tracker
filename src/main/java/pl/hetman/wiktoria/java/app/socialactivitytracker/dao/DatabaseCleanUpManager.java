@@ -7,8 +7,6 @@ import java.util.logging.Logger;
 
 public class DatabaseCleanUpManager implements DatabaseCleanUp{
 
-    // TODO: 28.05.2023 truncate table
-
     private static final Logger LOGGER =
             Logger.getLogger(DatabaseCleanUpManager.class.getName());
 
