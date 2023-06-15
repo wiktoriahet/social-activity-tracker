@@ -1,5 +1,6 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface Dao<T> {
@@ -12,6 +13,6 @@ public interface Dao<T> {
 
     Optional<T> read(Long id);
 
-    void list(T t);
+    List<T> list (T t);
 
 }

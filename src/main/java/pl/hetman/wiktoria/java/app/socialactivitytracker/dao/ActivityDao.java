@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -198,10 +199,15 @@ public class ActivityDao implements Dao<ActivityModel> {
 
     }
 
-    // TODO: 12.06.2023 dorobić?
+    // TODO: 12.06.2023 dorobić? czy powinno być optionalem?
     @Override
-    public void list(ActivityModel activityModel) {
+    public List<ActivityModel> list(ActivityModel activityModel) {
         LOGGER.info("list(" + activityModel + ")");
+
+
+
+
         LOGGER.info("list(...)");
+        return null;
     }
 }
