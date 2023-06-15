@@ -2,6 +2,7 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -36,8 +37,9 @@ public class ActivityTypeDao implements Dao<ActivityModel>{
     }
 
     @Override
-    public void list(ActivityModel activityModel) {
+    public List<ActivityModel> list(ActivityModel activityModel) {
         LOGGER.info("list(" + activityModel + ")");
         LOGGER.info("list(...)");
+        return null;
     }
 }
