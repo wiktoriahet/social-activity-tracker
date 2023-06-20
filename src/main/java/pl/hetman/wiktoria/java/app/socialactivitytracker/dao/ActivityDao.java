@@ -1,13 +1,17 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
+import org.h2.mvstore.MVStoreException;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLNonTransientConnectionException;
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ActivityDao implements Dao<ActivityModel> {
@@ -15,9 +19,9 @@ public class ActivityDao implements Dao<ActivityModel> {
     private static final Logger LOGGER = Logger.getLogger(ActivityDao.class.getName());
 
     @Override
-    public Optional<ActivityModel> save(ActivityModel activityModel) {
+    public Optional<ActivityModel> create(ActivityModel activityModel) throws ActivityException{
 
-        LOGGER.info("save(" + activityModel + ")");
+        LOGGER.info("create(" + activityModel + ")");
 
         //Connection connection = null;
         //PreparedStatement preparedStatement = null;
@@ -26,7 +30,7 @@ public class ActivityDao implements Dao<ActivityModel> {
                 " VALUES(?,?,?,?,?,?,?)";
         Long generatedId = UniqueIdGenerator.generateId();
         try (Connection connection = ConnectionManager.getInstance().getConnection();
-             PreparedStatement preparedStatement = connection.prepareStatement(queryString);) {
+             PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
             //try-with-resource
 
             preparedStatement.setLong(1, generatedId);
@@ -46,16 +50,25 @@ public class ActivityDao implements Dao<ActivityModel> {
             preparedStatement.setString(6, null);
             preparedStatement.setString(7, activityModel.getDuration());
             preparedStatement.executeUpdate();
+        } catch (RuntimeException e) {
+            //e.printStackTrace();
+//            LOGGER.log(Level.SEVERE, "General database problem while creating activity", e);
+            throw new ActivityException("General database problem while creating activity", e);
+        } catch (SQLNonTransientConnectionException e) {
+            LOGGER.log(Level.SEVERE, "SQL Database problem while creating activity", e);
+            throw new ActivityException("SQL Database problem while creating activity", e);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Database problem while creating activity", e);
+            throw new ActivityException("Database problem while creating activity", e);
         }
+
         activityModel.setId(generatedId);
         Optional<ActivityModel> optionalActivityModel = Optional.of(activityModel);
-        LOGGER.info("save(...)=" + optionalActivityModel);
+        LOGGER.info("create(...)=" + optionalActivityModel);
         return optionalActivityModel;
     }
 //    @Override
-//    public ActivityModel save(ActivityModel activityModel) {
+//    public ActivityModel create(ActivityModel activityModel) {
 //        //Connection connection = null;
 //        //PreparedStatement preparedStatement = null;
 //        String queryString = "INSERT INTO ACTIVITIES" +
@@ -91,6 +104,7 @@ public class ActivityDao implements Dao<ActivityModel> {
 //        return activityModel;
 //    }
 
+    //pozmieniać printstacki na loggery
     @Override
     public void update(ActivityModel activityModel) {
 
@@ -204,7 +218,7 @@ public class ActivityDao implements Dao<ActivityModel> {
     public List<ActivityModel> list(ActivityModel activityModel) {
         LOGGER.info("list(" + activityModel + ")");
 
-
+//list nie powinno przyjmować parametrów, ale może będzie musiała jakiś przyjąć
 
 
         LOGGER.info("list(...)");

@@ -1,14 +1,14 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
 import org.junit.jupiter.api.Test;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.ActivityDao;
 
 class ActivityDaoTest {
 
     @Test
-    void save(){
+    void save() throws ActivityException {
         //given
         ActivityDao activityDao = new ActivityDao();
 
@@ -23,14 +23,14 @@ class ActivityDaoTest {
         activityModel.setLabel("today's swimming");
 
         //when
-        activityDao.save(activityModel);
+        activityDao.create(activityModel);
 
         //then
 
     }
 
     @Test
-    void saveWithDuration(){
+    void saveWithDuration() throws ActivityException {
         //given
         ActivityDao activityDao = new ActivityDao();
 
@@ -47,7 +47,7 @@ class ActivityDaoTest {
         activityModel.setLabel("today's running");
 
         //when
-        activityDao.save(activityModel);
+        activityDao.create(activityModel);
 
         //then
 

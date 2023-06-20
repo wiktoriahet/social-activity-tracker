@@ -15,28 +15,31 @@ public class ConnectionManager {
 
     private static ConnectionManager connectionManager = null;
 
-    private ConnectionManager(){
+    private ConnectionManager() {
         CredentialsProperties credentialsProperties = new CredentialsProperties();
-        try{
+        try {
             Class.forName(driverClassName);
             connectionUrl = credentialsProperties.getProperty("database");
             dbUser = credentialsProperties.getProperty("dbuser");
             dbPwd = credentialsProperties.getProperty("dbpassword");
-        } catch(ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
-
+// TODO: 15.06.2023 dodać własny wyjątek do metody getConnection
+    // meotda musi rzucać własny wyjątek, obsługiwać to except. i runtime
+    // refactor całego kodu korzystającego z getConnection
 
     public Connection getConnection() throws SQLException {
         LOGGER.info("getConnection()");
-        LOGGER.info("getConnection(...)");
-        return DriverManager.getConnection(connectionUrl, dbUser, dbPwd);
+        Connection connection = DriverManager.getConnection(connectionUrl, dbUser, dbPwd);
+        LOGGER.info("getConnection(...) = " + connection);
+        return connection;
     }
 
-    public static ConnectionManager getInstance(){
+    public static ConnectionManager getInstance() {
         LOGGER.info("getInstance()");
-        if(connectionManager ==null){
+        if (connectionManager == null) {
             connectionManager = new ConnectionManager();
         }
         LOGGER.info("getInstance(...)");
