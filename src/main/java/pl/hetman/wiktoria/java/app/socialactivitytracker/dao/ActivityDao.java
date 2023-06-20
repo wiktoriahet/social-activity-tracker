@@ -15,7 +15,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ActivityDao implements Dao<ActivityModel> {
-
+    // TODO: 20.06.2023 zmieniłam printstacki na loggery
     private static final Logger LOGGER = Logger.getLogger(ActivityDao.class.getName());
 
     @Override
@@ -147,7 +147,8 @@ public class ActivityDao implements Dao<ActivityModel> {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Database problem during update", e);
+//            e.printStackTrace();
         }
 
         LOGGER.info("update(...)");
@@ -170,7 +171,8 @@ public class ActivityDao implements Dao<ActivityModel> {
             //System.out.println("Data deleted");
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Database problem while deleting activity", e);
+//            e.printStackTrace();
         }
 
         LOGGER.info("delete(...)");
@@ -206,7 +208,8 @@ public class ActivityDao implements Dao<ActivityModel> {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Database problem while reading from database", e);
+//            e.printStackTrace();
         }
         LOGGER.info("read(...)");
         return Optional.empty();

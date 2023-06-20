@@ -29,7 +29,7 @@ public class CredentialsProperties {
         return null;
     }
 
-    public void setUp() throws IOException { // TODO: 29.05.2023 tego nie uzywam nigdzie?
+    public void setUp() throws IOException {
         LOGGER.info("setUp()");
         Properties defaultProps = new Properties();
         FileInputStream in = new FileInputStream("default.properties");
