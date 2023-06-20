@@ -37,8 +37,8 @@ public class UserDao implements Dao<ActivityModel>{
     }
 
     @Override
-    public List<ActivityModel> list(ActivityModel activityModel) {
-        LOGGER.info("list(" + activityModel + ")");
+    public List<ActivityModel> list() {
+        LOGGER.info("list()");
         LOGGER.info("list(...)");
         return null;
     }

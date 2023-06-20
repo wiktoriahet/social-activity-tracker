@@ -15,6 +15,6 @@ public interface Dao<T> {
 
     void delete(T t);
 
-    List<T> list (T t);
+    List<T> list ();
 
 }
