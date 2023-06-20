@@ -3,12 +3,14 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 import org.h2.mvstore.MVStoreException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLNonTransientConnectionException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -19,7 +21,7 @@ public class ActivityDao implements Dao<ActivityModel> {
     private static final Logger LOGGER = Logger.getLogger(ActivityDao.class.getName());
 
     @Override
-    public Optional<ActivityModel> create(ActivityModel activityModel) throws ActivityException{
+    public Optional<ActivityModel> create(ActivityModel activityModel) throws ActivityException {
 
         LOGGER.info("create(" + activityModel + ")");
 
@@ -157,7 +159,7 @@ public class ActivityDao implements Dao<ActivityModel> {
     @Override
     public void delete(ActivityModel activityModel) {
 
-        LOGGER.info("delete("+activityModel+")");
+        LOGGER.info("delete(" + activityModel + ")");
 
         String queryString = "DELETE ACTIVITIES " +
                 "WHERE id = ?";
@@ -182,7 +184,7 @@ public class ActivityDao implements Dao<ActivityModel> {
     @Override
     public Optional<ActivityModel> read(Long id) {
 
-        LOGGER.info("read("+id+")");
+        LOGGER.info("read(" + id + ")");
 
         String queryString = "SELECT * FROM ACTIVITIES WHERE id = ?;";
 
@@ -216,15 +218,36 @@ public class ActivityDao implements Dao<ActivityModel> {
 
     }
 
-    // TODO: 12.06.2023 dorobić? czy powinno być optionalem?
+    // TODO: 20.06.2023 czy powinno printować wszystkie aktywności, czy jedynie konkretnego użytkownika?
     @Override
-    public List<ActivityModel> list(ActivityModel activityModel) {
-        LOGGER.info("list(" + activityModel + ")");
+    public List<ActivityModel> list() {
+        LOGGER.info("list()");
 
-//list nie powinno przyjmować parametrów, ale może będzie musiała jakiś przyjąć
+        List<ActivityModel> activityModelList = new ArrayList<>();
+        String queryString = "SELECT * FROM ACTIVITIES";
 
+        try (Connection connection = ConnectionManager.getInstance().getConnection();
+             PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+
+                ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+                ActivityModel activityModel = new ActivityModel();
+
+                activityModel.setId(resultSet.getLong(1));
+                activityTypeModel.setName(resultSet.getString(2));
+                activityTypeModel.setCustom(resultSet.getBoolean(3));
+                activityModel.chooseActivityType(activityTypeModel);
+                activityModelList.add(activityModel);
+            }
+
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Database problem while listing activities", e);
+        }
+// TODO: 20.06.2023 jak zrobic zeby sie printowalo w nowych linijkach?
+        System.out.println(activityModelList);
         LOGGER.info("list(...)");
-        return null;
+        return activityModelList;
     }
 }
