@@ -2,9 +2,9 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.ActivityDao;
 
 import java.util.Optional;
 
@@ -27,7 +27,7 @@ class ActivityDaoIntegrationTest {
     }
 
     @Test
-    void createAndRead(){
+    void createAndRead() throws ActivityException {
         //given
         ActivityDao activityDao = new ActivityDao();
         ActivityModel activityModel = new ActivityModel();
@@ -35,7 +35,7 @@ class ActivityDaoIntegrationTest {
 
         //when
 
-        Optional<ActivityModel> savedActivityModel = activityDao.save(activityModel);
+        Optional<ActivityModel> savedActivityModel = activityDao.create(activityModel);
         Optional<ActivityModel> readActivityModel = activityDao.read(savedActivityModel.get().getId());
         System.out.println(readActivityModel);
 
@@ -47,7 +47,7 @@ class ActivityDaoIntegrationTest {
     }
 
     @Test
-    void update(){
+    void update() throws ActivityException {
         //given
 
         //utworzona aktywność do zapisania
@@ -66,7 +66,7 @@ class ActivityDaoIntegrationTest {
         activityModel.duration();
         activityModel.setLabel("today's walking");
 
-        activityDao.save(activityModel);
+        activityDao.create(activityModel);
 
         //dane do modyfikacji
         activityTypeModel.setName("jogging");
@@ -84,7 +84,7 @@ class ActivityDaoIntegrationTest {
     }
 
     @Test
-    void delete(){
+    void delete() throws ActivityException {
         //given
         //utworzona aktywność do usunięcia
         ActivityModel activityModel = new ActivityModel();
@@ -101,7 +101,7 @@ class ActivityDaoIntegrationTest {
         activityModel.duration();
         activityModel.setLabel("today's flying");
 
-        activityDao.save(activityModel);
+        activityDao.create(activityModel);
 
         //when
         activityDao.delete(activityModel);

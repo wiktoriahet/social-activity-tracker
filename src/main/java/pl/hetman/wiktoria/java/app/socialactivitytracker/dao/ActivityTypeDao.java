@@ -11,9 +11,9 @@ public class ActivityTypeDao implements Dao<ActivityModel>{
     private static final Logger LOGGER = Logger.getLogger(ActivityTypeDao.class.getName());
 
     @Override
-    public Optional<ActivityModel> save(ActivityModel activityModel) {
-        LOGGER.info("save(" + activityModel + ")");
-        LOGGER.info("save(...)");
+    public Optional<ActivityModel> create(ActivityModel activityModel) {
+        LOGGER.info("create(" + activityModel + ")");
+        LOGGER.info("create(...)");
         return Optional.empty();
     }
 

@@ -2,9 +2,9 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.ActivityDao;
 
 import java.util.Optional;
 
@@ -15,7 +15,7 @@ class ActivityDaoOptionalsTest {
     public static final String ACTIVITY_MODEL_LABEL_DANCE = "today's dancing";
 
     @Test
-    void save() {
+    void save() throws ActivityException {
         //given
         ActivityDao activityDao = new ActivityDao();
 
@@ -29,7 +29,7 @@ class ActivityDaoOptionalsTest {
         activityModel.setLabel("today's zbijak");
 
         //when
-        Optional<ActivityModel> savedActivity = activityDao.save(activityModel);
+        Optional<ActivityModel> savedActivity = activityDao.create(activityModel);
 
         //then
         Assertions.assertAll(
