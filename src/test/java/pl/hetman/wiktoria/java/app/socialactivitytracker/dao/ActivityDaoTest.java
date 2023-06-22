@@ -54,7 +54,7 @@ class ActivityDaoTest {
     }
 
     @Test
-    void update(){
+    void update() throws ActivityException{
         //given
         ActivityDao activityDao = new ActivityDao();
 
@@ -78,7 +78,7 @@ class ActivityDaoTest {
     }
 
     @Test
-    void delete(){
+    void delete() throws ActivityException{
         //given
         ActivityModel activityModel = new ActivityModel();
         ActivityDao activityDao = new ActivityDao();

@@ -108,7 +108,7 @@ public class ActivityDao implements Dao<ActivityModel> {
 
     //pozmieniać printstacki na loggery
     @Override
-    public void update(ActivityModel activityModel) {
+    public void update(ActivityModel activityModel) throws ActivityException{
 
         LOGGER.info("update(" + activityModel + ")");
 
@@ -157,7 +157,7 @@ public class ActivityDao implements Dao<ActivityModel> {
     }
 
     @Override
-    public void delete(ActivityModel activityModel) {
+    public void delete(ActivityModel activityModel) throws ActivityException {
 
         LOGGER.info("delete(" + activityModel + ")");
 
@@ -182,7 +182,7 @@ public class ActivityDao implements Dao<ActivityModel> {
     }
 
     @Override
-    public Optional<ActivityModel> read(Long id) {
+    public Optional<ActivityModel> read(Long id) throws ActivityException{
 
         LOGGER.info("read(" + id + ")");
 
@@ -220,11 +220,11 @@ public class ActivityDao implements Dao<ActivityModel> {
 
     // TODO: 20.06.2023 czy powinno printować wszystkie aktywności, czy jedynie konkretnego użytkownika?
     @Override
-    public List<ActivityModel> list() {
+    public List<ActivityModel> list() throws ActivityException{
         LOGGER.info("list()");
 
-        List<ActivityModel> activityModelList = new ArrayList<>();
-        String queryString = "SELECT * FROM ACTIVITIES";
+        List<ActivityModel> activityModels = new ArrayList<>();
+        String queryString = "SELECT * FROM ACTIVITIES;";
 
         try (Connection connection = ConnectionManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
@@ -239,15 +239,15 @@ public class ActivityDao implements Dao<ActivityModel> {
                 activityTypeModel.setName(resultSet.getString(2));
                 activityTypeModel.setCustom(resultSet.getBoolean(3));
                 activityModel.chooseActivityType(activityTypeModel);
-                activityModelList.add(activityModel);
+                activityModels.add(activityModel);
             }
 
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Database problem while listing activities", e);
         }
-// TODO: 20.06.2023 jak zrobic zeby sie printowalo w nowych linijkach?
-        System.out.println(activityModelList);
-        LOGGER.info("list(...)");
-        return activityModelList;
+
+        LOGGER.info("list(...)" + activityModels);
+
+        return activityModels;
     }
 }

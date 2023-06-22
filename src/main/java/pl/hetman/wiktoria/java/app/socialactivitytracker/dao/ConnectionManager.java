@@ -1,8 +1,11 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
+import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConnectionManager {
@@ -30,9 +33,20 @@ public class ConnectionManager {
     // meotda musi rzucać własny wyjątek, obsługiwać to except. i runtime
     // refactor całego kodu korzystającego z getConnection
 
-    public Connection getConnection() throws SQLException {
+    //dodałam crud do serwisów
+
+    public Connection getConnection() throws ActivityException {
         LOGGER.info("getConnection()");
-        Connection connection = DriverManager.getConnection(connectionUrl, dbUser, dbPwd);
+        Connection connection = null;
+        try {
+            connection = DriverManager.getConnection(connectionUrl, dbUser, dbPwd);
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Problem with connection", e);
+            throw new ActivityException("Problem with connection", e);
+        } catch (RuntimeException e){
+            LOGGER.log(Level.SEVERE, "Runtime problem with connection", e);
+            throw new ActivityException("Runtime problem with connection", e);
+        }
         LOGGER.info("getConnection(...) = " + connection);
         return connection;
     }

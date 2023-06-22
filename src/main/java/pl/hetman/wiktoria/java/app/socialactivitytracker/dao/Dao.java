@@ -9,12 +9,12 @@ public interface Dao<T> {
 
     Optional<T> create(T t) throws ActivityException;
 
-    Optional<T> read(Long id);
+    Optional<T> read(Long id) throws ActivityException;
 
-    void update(T t);
+    void update(T t) throws ActivityException;
 
-    void delete(T t);
+    void delete(T t) throws ActivityException;
 
-    List<T> list ();
+    List<T> list ()throws ActivityException;
 
 }

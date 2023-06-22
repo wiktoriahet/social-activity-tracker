@@ -1,5 +1,7 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
+import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -11,7 +13,7 @@ public class DatabaseCleanUpManager implements DatabaseCleanUp{
             Logger.getLogger(DatabaseCleanUpManager.class.getName());
 
     @Override
-    public void deleteTable() {
+    public void deleteTable() throws ActivityException {
         LOGGER.info("deleteTable()");
         String queryString = "TRUNCATE TABLE ACTIVITIES_COPY_TWO";
 
