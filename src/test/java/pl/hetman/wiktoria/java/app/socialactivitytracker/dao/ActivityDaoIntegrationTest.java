@@ -14,7 +14,7 @@ class ActivityDaoIntegrationTest {
     public static final String ACTIVITY_MODEL_LABEL_JUMP = "today's jumping";
 
     @Test
-   void read(){
+   void read() throws ActivityException{
        //given
         ActivityDao activityDao = new ActivityDao();
 
