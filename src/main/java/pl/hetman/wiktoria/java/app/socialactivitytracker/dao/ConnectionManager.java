@@ -11,10 +11,10 @@ import java.util.logging.Logger;
 public class ConnectionManager {
     private static final Logger LOGGER = Logger.getLogger(ConnectionManager.class.getName());
 
-    String driverClassName = "org.h2.Driver";
-    String connectionUrl;
-    String dbUser;
-    String dbPwd;
+    private String driverClassName = "org.h2.Driver";
+    private String connectionUrl;
+    private String dbUser;
+    private String dbPwd;
 
     private static ConnectionManager connectionManager = null;
 
@@ -29,11 +29,6 @@ public class ConnectionManager {
             e.printStackTrace();
         }
     }
-// TODO: 15.06.2023 dodać własny wyjątek do metody getConnection
-    // meotda musi rzucać własny wyjątek, obsługiwać to except. i runtime
-    // refactor całego kodu korzystającego z getConnection
-
-    //dodałam crud do serwisów
 
     public Connection getConnection() throws ActivityException {
         LOGGER.info("getConnection()");
