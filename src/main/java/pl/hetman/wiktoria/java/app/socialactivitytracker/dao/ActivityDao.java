@@ -106,7 +106,6 @@ public class ActivityDao implements Dao<ActivityModel> {
 //        return activityModel;
 //    }
 
-    //pozmieniać printstacki na loggery
     @Override
     public void update(ActivityModel activityModel) throws ActivityException{
 
@@ -218,7 +217,6 @@ public class ActivityDao implements Dao<ActivityModel> {
 
     }
 
-    // TODO: 20.06.2023 czy powinno printować wszystkie aktywności, czy jedynie konkretnego użytkownika?
     @Override
     public List<ActivityModel> list() throws ActivityException{
         LOGGER.info("list()");
