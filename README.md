@@ -24,9 +24,9 @@
 
 3. Connection Manager and properties
 
-    - I am using ConnectionManager class to access H2 database in any place in the code
-    - It is using properties files to make a connection
-    - Different properties file and database is being used in testing
+    - I am using ConnectionManager class to manage access to H2 database in any place in the code
+    - It is using property files to store connection credentials
+    - Production and test databases use different property files
 
 4. Tests
 
@@ -46,7 +46,7 @@
 
 8. LocalDateTime and ChronoUnit are used to save time and to calculate activity duration
 
-## To do list for next month
+## To do list
 
 1. Cover more code with tests to achieve at least ~80% coverage
 2. Add business logic to service layer

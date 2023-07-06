@@ -18,21 +18,18 @@ public class ActivityModel {
 
     public void chooseActivityType(ActivityTypeModel activityType) {
         LOGGER.info("chooseActivityType("+activityType+")");
-        //System.out.println("chooseActivityType(" + activityType + ")");
         this.activityType = activityType;
         LOGGER.info("chooseActivityType(...)");
     }
 
     public void begin() {
         LOGGER.info("begin()");
-        //System.out.println("begin()");
         this.start = LocalDateTime.now();
         LOGGER.info("begin(...)");
     }
 
     public void end() {
         LOGGER.info("end()");
-        //System.out.println("stop()");
         this.stop = LocalDateTime.now();
         LOGGER.info("end(...)");
     }
@@ -49,15 +46,10 @@ public class ActivityModel {
 
             long hours = startTemp.until(this.stop, ChronoUnit.HOURS);
             startTemp = startTemp.plusHours(hours);
-            //System.out.println("1: " + startTemp);
 
             long minutes = startTemp.until(this.stop, ChronoUnit.MINUTES);
-            //startTemp = startTemp.plusMinutes(minutes);
-            //System.out.println("2: " + startTemp);
 
             long seconds = startTemp.until(this.stop, ChronoUnit.SECONDS);
-            //startTemp = startTemp.plusSeconds(seconds);
-            //System.out.println("3: " + startTemp);
 
             System.out.println("Started: " + this.start);
             System.out.println("Finished: " + this.stop);
