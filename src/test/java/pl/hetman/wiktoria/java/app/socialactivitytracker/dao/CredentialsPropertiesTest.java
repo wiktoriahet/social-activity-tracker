@@ -1,21 +1,22 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.CredentialsProperties;
 
 import java.io.IOException;
 
 class CredentialsPropertiesTest {
 
     @Test
-    void setUp() throws IOException {
+    void getProperty() {
         //given
         CredentialsProperties credentialsProperties = new CredentialsProperties();
 
         //when
-        credentialsProperties.setUp();
+        String property = credentialsProperties.getProperty("database");
 
         //then
+        Assertions.assertNotNull(property, "property is null");
 
     }
 }
