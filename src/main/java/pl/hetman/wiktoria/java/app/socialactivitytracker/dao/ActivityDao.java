@@ -4,6 +4,7 @@ import org.h2.mvstore.MVStoreException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,20 +18,36 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ActivityDao implements Dao<ActivityModel> {
-    // TODO: 20.06.2023 zmieniłam printstacki na loggery
+
     private static final Logger LOGGER = Logger.getLogger(ActivityDao.class.getName());
+    // TODO: 10.07.2023 implementacja zależnością? + wstrzykiwanie zależności w konstruktorze
+    private final UserDao userDao;
+
+    public ActivityDao(UserDao userDao){
+        this.userDao = userDao;
+    }
 
     @Override
     public Optional<ActivityModel> create(ActivityModel activityModel) throws ActivityException {
 
         LOGGER.info("create(" + activityModel + ")");
 
+        // TODO: 10.07.2023 UserDao metoda create, ale czemu tutaj? czy user nie powinien byc juz na tym etapie stworzony?
+        // user zalogowany, sprawdzony czy istnieje, i tu juz te dane zapisane na indywidualnym koncie usera?
+
+
         //Connection connection = null;
         //PreparedStatement preparedStatement = null;
         String queryString = "INSERT INTO ACTIVITIES" +
-                "(id, name, custom, label, start, stop, duration)" +
-                " VALUES(?,?,?,?,?,?,?)";
+                "(id, name, custom, label, start, stop, duration, user_id)" +
+                " VALUES(?,?,?,?,?,?,?,?)";
         Long generatedId = UniqueIdGenerator.generateId();
+
+        // TODO: 10.07.2023 delegacja?
+        //Optional<ActivityModel> optionalUserDao = userDao.create(activityModel);
+        UserModel userModel = activityModel.getUser();
+        Long userId = userModel.getId();
+
         try (Connection connection = ConnectionManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
             //try-with-resource

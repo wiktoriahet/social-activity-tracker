@@ -7,7 +7,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 public class ActivityTypeDao implements Dao<ActivityModel>{
-    // TODO: 26.06.2023 testy później, jak będzie więcej do testowania
+
     private static final Logger LOGGER = Logger.getLogger(ActivityTypeDao.class.getName());
 
     @Override

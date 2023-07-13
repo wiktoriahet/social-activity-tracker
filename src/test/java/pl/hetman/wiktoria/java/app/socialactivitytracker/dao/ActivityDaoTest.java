@@ -10,7 +10,8 @@ class ActivityDaoTest {
     @Test
     void save() throws ActivityException {
         //given
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
 
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
         activityTypeModel.setName("swimming");
@@ -32,7 +33,8 @@ class ActivityDaoTest {
     @Test
     void saveWithDuration() throws ActivityException {
         //given
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
 
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
         activityTypeModel.setName("running");
@@ -56,7 +58,8 @@ class ActivityDaoTest {
     @Test
     void update() throws ActivityException{
         //given
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
 
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
         activityTypeModel.setName("flying");
@@ -81,7 +84,8 @@ class ActivityDaoTest {
     void delete() throws ActivityException{
         //given
         ActivityModel activityModel = new ActivityModel();
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
         activityModel.setId(1L);
         //when
         activityDao.delete(activityModel);

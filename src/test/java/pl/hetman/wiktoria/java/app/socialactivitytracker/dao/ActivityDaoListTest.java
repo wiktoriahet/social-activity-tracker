@@ -10,11 +10,13 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActivityDaoListTest {
-    // TODO: 20.06.2023 test dla listy
+
     @Test
     void list() throws ActivityException {
         //given
-        ActivityDao activityDao = new ActivityDao();
+        // TODO: 10.07.2023 poprawiony test dla userDao?
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
 
         //when
         List<ActivityModel> activityModelList = activityDao.list();
