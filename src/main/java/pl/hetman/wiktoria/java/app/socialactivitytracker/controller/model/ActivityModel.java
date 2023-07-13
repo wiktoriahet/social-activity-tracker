@@ -6,18 +6,34 @@ import java.util.logging.Logger;
 
 public class ActivityModel {
 
+    // TODO: 06.07.2023 https://github.com/juniorjavadeveloper-pl/hibernate-examples
+    // zapoznać się z przykładem https://github.com/juniorjavadeveloper-pl/hibernate-examples/tree/master/src/test/java/pl/juniorjavadeveloper/examples/hibernate/basic/entity/model
+    // sklonować repozytorium
+    // stworzyć nowy projekt dla getting started z hibernate.org https://docs.jboss.org/hibernate/orm/6.2/quickstart/html_single/#tutorial-native
+
+
     private static final Logger LOGGER = Logger.getLogger(ActivityModel.class.getName());
 
 
     private Long id;
+    private UserModel user;
     private ActivityTypeModel activityType;
-    LocalDateTime start;
-    LocalDateTime stop;
+    // TODO: 06.07.2023 dodać hermetyzajce localdatetime i poprawic wszystko w kodzie [x]
+    private LocalDateTime start;
+    private LocalDateTime stop;
     private String duration;
     private String label;
 
+    public ActivityModel() {
+    }
+
+    public ActivityModel(UserModel user, ActivityTypeModel activityType) {
+        this.user = user;
+        this.activityType = activityType;
+    }
+
     public void chooseActivityType(ActivityTypeModel activityType) {
-        LOGGER.info("chooseActivityType("+activityType+")");
+        LOGGER.info("chooseActivityType(" + activityType + ")");
         this.activityType = activityType;
         LOGGER.info("chooseActivityType(...)");
     }
@@ -75,6 +91,14 @@ public class ActivityModel {
         this.id = id;
     }
 
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
     public ActivityTypeModel getActivityType() {
         return activityType;
     }
@@ -84,6 +108,16 @@ public class ActivityModel {
     }
 
     public LocalDateTime getStop() {
+        return stop;
+    }
+
+    public LocalDateTime setStart(LocalDateTime start) {
+        this.start = start;
+        return start;
+    }
+
+    public LocalDateTime setStop(LocalDateTime stop) {
+        this.stop = stop;
         return stop;
     }
 
@@ -103,6 +137,7 @@ public class ActivityModel {
     public String toString() {
         return "ActivityModel{" +
                 "id=" + id +
+                ", user=" + user +
                 ", activityType=" + activityType +
                 ", start=" + start +
                 ", stop=" + stop +

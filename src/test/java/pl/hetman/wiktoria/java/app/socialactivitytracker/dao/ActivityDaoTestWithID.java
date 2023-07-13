@@ -13,7 +13,8 @@ class ActivityDaoTestWithID {
     @Test
     void save() throws ActivityException {
         //given
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
 
         activityTypeModel.setName("cycling");

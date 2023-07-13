@@ -16,7 +16,8 @@ class ActivityDaoIntegrationTest {
     @Test
    void read() throws ActivityException{
        //given
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
 
         //when
         Optional<ActivityModel> readActivityModel = activityDao.read(-99L);
@@ -29,7 +30,8 @@ class ActivityDaoIntegrationTest {
     @Test
     void createAndRead() throws ActivityException {
         //given
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_MODEL_LABEL_JUMP);
 
@@ -51,7 +53,8 @@ class ActivityDaoIntegrationTest {
         //given
 
         //utworzona aktywność do zapisania
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
 
         activityTypeModel.setName("walking");
@@ -88,7 +91,8 @@ class ActivityDaoIntegrationTest {
         //given
         //utworzona aktywność do usunięcia
         ActivityModel activityModel = new ActivityModel();
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
 
         activityTypeModel.setName("flying");

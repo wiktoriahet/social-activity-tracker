@@ -1,43 +1,47 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-public class UserDao implements Dao<ActivityModel>{
+public class UserDao implements Dao<UserModel>{
 
     private static final Logger LOGGER = Logger.getLogger(UserDao.class.getName());
 
     @Override
-    public Optional<ActivityModel> create(ActivityModel activityModel) {
-        LOGGER.info("create(" + activityModel + ")");
+    public Optional<UserModel> create(UserModel userModel) {
+        LOGGER.info("create(" + userModel + ")");
+        // TODO: 06.07.2023 zaimplementowac metodę [x?]
+        // użyć tą metodę w ActivityDao#create();
         LOGGER.info("create(...)");
         return Optional.empty();
     }
 
     @Override
-    public void update(ActivityModel activityModel) {
-        LOGGER.info("update(" + activityModel + ")");
+    public void update(UserModel userModel) {
+        LOGGER.info("update(" + userModel + ")");
         LOGGER.info("update(...)");
     }
 
     @Override
-    public void delete(ActivityModel activityModel) {
-        LOGGER.info("delete(" + activityModel + ")");
+    public void delete(UserModel userModel) {
+        LOGGER.info("delete(" + userModel + ")");
         LOGGER.info("delete(...)");
     }
 
+    // TODO: 13.07.2023 zaimplementować read na potrzeby tworzenia aktywności
     @Override
-    public Optional<ActivityModel> read(Long id) {
+    public Optional<UserModel> read(Long id) {
         LOGGER.info("read(" + id + ")");
         LOGGER.info("read(...)");
         return Optional.empty();
     }
 
     @Override
-    public List<ActivityModel> list() {
+    public List<UserModel> list() {
         LOGGER.info("list()");
         LOGGER.info("list(...)");
         return null;
