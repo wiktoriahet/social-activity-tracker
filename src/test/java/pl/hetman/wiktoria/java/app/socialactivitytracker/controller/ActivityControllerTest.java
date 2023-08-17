@@ -6,6 +6,7 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityE
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.MissingLabelActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.ActivityDao;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.UserDao;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.service.ActivityService;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +16,8 @@ class ActivityControllerTest {
     @Test
     void create() throws ActivityException {
         //given
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
         ActivityService activityService = new ActivityService(activityDao);
         ActivityController activityController = new ActivityController(activityService);
         ActivityModel activityModel = new ActivityModel();
@@ -34,7 +36,8 @@ class ActivityControllerTest {
     @Test
     void createWithMissingLabel() throws ActivityException {
         //given
-        ActivityDao activityDao = new ActivityDao();
+        UserDao userDao = new UserDao();
+        ActivityDao activityDao = new ActivityDao(userDao);
         ActivityService activityService = new ActivityService(activityDao);
         ActivityController activityController = new ActivityController(activityService);
         ActivityModel activityModel = new ActivityModel();
