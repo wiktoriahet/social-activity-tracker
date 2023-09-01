@@ -1,6 +1,7 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
-import org.h2.mvstore.MVStoreException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
@@ -17,13 +18,14 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Component
 public class ActivityDao implements Dao<ActivityModel> {
 
     private static final Logger LOGGER = Logger.getLogger(ActivityDao.class.getName());
-    // TODO: 10.07.2023 implementacja zależnością? + wstrzykiwanie zależności w konstruktorze
-    private final UserDao userDao;
 
-    public ActivityDao(UserDao userDao){
+    private UserDao userDao;
+
+    public ActivityDao(UserDao userDao) {
         this.userDao = userDao;
     }
 
@@ -31,22 +33,13 @@ public class ActivityDao implements Dao<ActivityModel> {
     public Optional<ActivityModel> create(ActivityModel activityModel) throws ActivityException {
 
         LOGGER.info("create(" + activityModel + ")");
-
-        // TODO: 10.07.2023 UserDao metoda create, ale czemu tutaj? czy user nie powinien byc juz na tym etapie stworzony?
-        // user zalogowany, sprawdzony czy istnieje, i tu juz te dane zapisane na indywidualnym koncie usera?
-
-
-        //Connection connection = null;
-        //PreparedStatement preparedStatement = null;
         String queryString = "INSERT INTO ACTIVITIES" +
                 "(id, name, custom, label, start, stop, duration, user_id)" +
                 " VALUES(?,?,?,?,?,?,?,?)";
         Long generatedId = UniqueIdGenerator.generateId();
-
-        // TODO: 10.07.2023 delegacja?
-        //Optional<ActivityModel> optionalUserDao = userDao.create(activityModel);
         UserModel userModel = activityModel.getUser();
-        Long userId = userModel.getId();
+        // nie uzywane tu??? Long userId = userModel.getId();
+
 
         try (Connection connection = ConnectionManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
@@ -70,8 +63,6 @@ public class ActivityDao implements Dao<ActivityModel> {
             preparedStatement.setString(7, activityModel.getDuration());
             preparedStatement.executeUpdate();
         } catch (RuntimeException e) {
-            //e.printStackTrace();
-//            LOGGER.log(Level.SEVERE, "General database problem while creating activity", e);
             throw new ActivityException("General database problem while creating activity", e);
         } catch (SQLNonTransientConnectionException e) {
             LOGGER.log(Level.SEVERE, "SQL Database problem while creating activity", e);
@@ -86,45 +77,9 @@ public class ActivityDao implements Dao<ActivityModel> {
         LOGGER.info("create(...)=" + optionalActivityModel);
         return optionalActivityModel;
     }
-//    @Override
-//    public ActivityModel create(ActivityModel activityModel) {
-//        //Connection connection = null;
-//        //PreparedStatement preparedStatement = null;
-//        String queryString = "INSERT INTO ACTIVITIES" +
-//                "(id, name, custom, label, start, stop, duration)" +
-//                " VALUES(?,?,?,?,?,?,?)";
-//        Long generatedId = UniqueIdGenerator.generateId();
-//        try (Connection connection = ConnectionManager.getInstance().getConnection();
-//             PreparedStatement preparedStatement = connection.prepareStatement(queryString);) {
-//            //try-with-resource
-//
-//            preparedStatement.setLong(1, generatedId);
-//            if(activityModel.getActivityType() !=null) {
-//                preparedStatement.setString(2, activityModel.getActivityType().getName());
-//                preparedStatement.setString(3, String.valueOf(activityModel.getActivityType().isCustom()));
-//            } else {
-//                preparedStatement.setString(2, null);
-//                preparedStatement.setString(3, null);
-//            }
-//            preparedStatement.setString(4, activityModel.getLabel());
-//            if(activityModel.getStart() !=null) {
-//                preparedStatement.setString(5, activityModel.getStart().toString());
-//            } else {
-//                preparedStatement.setString(5, null);
-//            }
-//            preparedStatement.setString(6, null);
-//            preparedStatement.setString(7, activityModel.getDuration());
-//            preparedStatement.executeUpdate();
-//            System.out.println("Data saved");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        activityModel.setId(generatedId);
-//        return activityModel;
-//    }
 
     @Override
-    public void update(ActivityModel activityModel) throws ActivityException{
+    public void update(ActivityModel activityModel) throws ActivityException {
 
         LOGGER.info("update(" + activityModel + ")");
 
@@ -166,7 +121,6 @@ public class ActivityDao implements Dao<ActivityModel> {
 
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Database problem during update", e);
-//            e.printStackTrace();
         }
 
         LOGGER.info("update(...)");
@@ -186,19 +140,14 @@ public class ActivityDao implements Dao<ActivityModel> {
             preparedStatement.setLong(1, activityModel.getId());
             preparedStatement.executeUpdate();
 
-            //System.out.println("Data deleted");
-
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Database problem while deleting activity", e);
-//            e.printStackTrace();
         }
-
         LOGGER.info("delete(...)");
-
     }
 
     @Override
-    public Optional<ActivityModel> read(Long id) throws ActivityException{
+    public Optional<ActivityModel> read(Long id) throws ActivityException {
 
         LOGGER.info("read(" + id + ")");
 
@@ -209,6 +158,8 @@ public class ActivityDao implements Dao<ActivityModel> {
 
             preparedStatement.setLong(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
+
+            userDao.read(id);
 
             if (resultSet.next()) {
                 Long readId = resultSet.getLong("ID");
@@ -227,7 +178,6 @@ public class ActivityDao implements Dao<ActivityModel> {
 
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Database problem while reading from database", e);
-//            e.printStackTrace();
         }
         LOGGER.info("read(...)");
         return Optional.empty();
@@ -235,7 +185,7 @@ public class ActivityDao implements Dao<ActivityModel> {
     }
 
     @Override
-    public List<ActivityModel> list() throws ActivityException{
+    public List<ActivityModel> list() throws ActivityException {
         LOGGER.info("list()");
 
         List<ActivityModel> activityModels = new ArrayList<>();

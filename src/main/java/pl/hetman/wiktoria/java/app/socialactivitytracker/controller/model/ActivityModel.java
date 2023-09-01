@@ -6,12 +6,6 @@ import java.util.logging.Logger;
 
 public class ActivityModel {
 
-    // TODO: 06.07.2023 https://github.com/juniorjavadeveloper-pl/hibernate-examples
-    // zapoznać się z przykładem https://github.com/juniorjavadeveloper-pl/hibernate-examples/tree/master/src/test/java/pl/juniorjavadeveloper/examples/hibernate/basic/entity/model
-    // sklonować repozytorium
-    // stworzyć nowy projekt dla getting started z hibernate.org https://docs.jboss.org/hibernate/orm/6.2/quickstart/html_single/#tutorial-native
-
-
     private static final Logger LOGGER = Logger.getLogger(ActivityModel.class.getName());
 
 
