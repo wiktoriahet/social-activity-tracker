@@ -1,21 +1,20 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
+import org.springframework.stereotype.Component;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-public class UserDao implements Dao<UserModel>{
+@Component
+public class UserDao implements Dao<UserModel> {
 
     private static final Logger LOGGER = Logger.getLogger(UserDao.class.getName());
 
     @Override
     public Optional<UserModel> create(UserModel userModel) {
         LOGGER.info("create(" + userModel + ")");
-        // TODO: 06.07.2023 zaimplementowac metodę [x?]
-        // użyć tą metodę w ActivityDao#create();
         LOGGER.info("create(...)");
         return Optional.empty();
     }
@@ -32,7 +31,6 @@ public class UserDao implements Dao<UserModel>{
         LOGGER.info("delete(...)");
     }
 
-    // TODO: 13.07.2023 zaimplementować read na potrzeby tworzenia aktywności
     @Override
     public Optional<UserModel> read(Long id) {
         LOGGER.info("read(" + id + ")");
