@@ -14,18 +14,18 @@ import static org.junit.jupiter.api.Assertions.*;
 @SpringBootTest
 class ActivityDaoSpringTest {
 
-//    @Autowired
-//    private ActivityDao activityDao;
-//
-//    @Test
-//    void read() throws ActivityException {
-//        //given
-//        ActivityModel activityModel = new ActivityModel();
-//
-//        //when
-//        Optional<ActivityModel> optionalActivityModel = activityDao.read(1L);
-//
-//        //then
-//        Assertions.assertNotNull(optionalActivityModel, "optionalActivityModel is null");
-//    }
+    @Autowired
+    private ActivityDao activityDao;
+
+    @Test
+    void read() throws ActivityException {
+        //given
+        ActivityModel activityModel = new ActivityModel();
+
+        //when
+        Optional<ActivityModel> optionalActivityModel = activityDao.read(1L);
+
+        //then
+        Assertions.assertNotNull(optionalActivityModel, "optionalActivityModel is null");
+    }
 }
