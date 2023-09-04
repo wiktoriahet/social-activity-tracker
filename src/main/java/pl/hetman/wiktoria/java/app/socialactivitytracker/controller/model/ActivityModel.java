@@ -1,21 +1,36 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
+
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.logging.Logger;
 
+@Entity
+@Table(name = "ACTIVITIES")
 public class ActivityModel {
 
     private static final Logger LOGGER = Logger.getLogger(ActivityModel.class.getName());
 
-
+    @Id
+    @GeneratedValue
     private Long id;
-    private UserModel user;
-    private ActivityTypeModel activityType;
-    // TODO: 06.07.2023 dodać hermetyzajce localdatetime i poprawic wszystko w kodzie [x]
+    @OneToOne(mappedBy="activityModel")
+    private UserModel user; // <- przez to null pointer
+    @OneToOne(mappedBy="activityModel")
+    private ActivityTypeModel activityType; // <- przez to null pointer
+    @Column(name = "START")
     private LocalDateTime start;
+    @Column(name = "STOP")
     private LocalDateTime stop;
+    @Column(name = "DURATION")
     private String duration;
+    @Column(name = "LABEL")
     private String label;
 
     public ActivityModel() {

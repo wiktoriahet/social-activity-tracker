@@ -11,7 +11,7 @@ import java.util.Optional;
 class ActivityDaoIntegrationTest {
 
     public static final long ACTIVITY_MODEL_ID_55 = 55L;
-    public static final String ACTIVITY_MODEL_LABEL_JUMP = "today's jumping";
+    public static final String ACTIVITY_MODEL_LABEL_KAYAK = "today's kayaking";
 
     @Test
    void read() throws ActivityException{
@@ -33,7 +33,7 @@ class ActivityDaoIntegrationTest {
         UserDao userDao = new UserDao();
         ActivityDao activityDao = new ActivityDao(userDao);
         ActivityModel activityModel = new ActivityModel();
-        activityModel.setLabel(ACTIVITY_MODEL_LABEL_JUMP);
+        activityModel.setLabel(ACTIVITY_MODEL_LABEL_KAYAK);
 
         //when
 
@@ -44,7 +44,7 @@ class ActivityDaoIntegrationTest {
         //then
         Assertions.assertAll(
                 ()->Assertions.assertNotNull(readActivityModel, "activityModel is null"),
-                ()->Assertions.assertEquals(ACTIVITY_MODEL_LABEL_JUMP, readActivityModel.get().getLabel(), "Label not equals")
+                ()->Assertions.assertEquals(ACTIVITY_MODEL_LABEL_KAYAK, readActivityModel.get().getLabel(), "Label not equals")
         );
     }
 

@@ -34,11 +34,16 @@ public class ActivityDao implements Dao<ActivityModel> {
 
         LOGGER.info("create(" + activityModel + ")");
         String queryString = "INSERT INTO ACTIVITIES" +
-                "(id, name, custom, label, start, stop, duration, user_id)" +
-                " VALUES(?,?,?,?,?,?,?,?)";
+//                "(id, name, custom, label, start, stop, duration, user_id)" +
+//                " VALUES(?,?,?,?,?,?,?,?)";
+                "(id, name, custom, label, start, stop, duration)" +
+                " VALUES(?,?,?,?,?,?,?)";
         Long generatedId = UniqueIdGenerator.generateId();
-        UserModel userModel = activityModel.getUser();
-        // nie uzywane tu??? Long userId = userModel.getId();
+        //UserModel userModel = activityModel.getUser();
+        //Long userId = userModel.getId();
+        // <--- nie działa, stworzyliśmy na przyszłość do hibernate, ale jest nullowy teraz,
+        // więc wszystko się sypnęło, (chcemy, żeby aktywność zapisała użytkownika)
+        // póki co to wykomentowałam i testy działają
 
 
         try (Connection connection = ConnectionManager.getInstance().getConnection();
