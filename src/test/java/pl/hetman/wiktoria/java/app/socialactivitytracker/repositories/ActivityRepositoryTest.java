@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class ActivityRepositoryTest {
     private static final String ACTIVITY_LABEL_RUNNING = "Running";
-    public static final String ACTIVITY_LABEL_KAYAKING = "Kayaking";
+    public static final String ACTIVITY_LABEL_TENNIS = "Playing tennis";
 
     public ActivityRepositoryTest() {
     }
@@ -23,15 +21,13 @@ class ActivityRepositoryTest {
     void create() {
         //given
         ActivityModel activityModel = new ActivityModel();
-        activityModel.setLabel(ACTIVITY_LABEL_KAYAKING);
-
+        activityModel.setLabel(ACTIVITY_LABEL_TENNIS);
 
         //when
         ActivityModel createdActivityModel = activityRepository.create(activityModel);
 
         //then
         Assertions.assertNotNull(createdActivityModel, "createdActivityModel is null");
-
 
     }
 }
