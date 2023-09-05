@@ -5,12 +5,14 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.Dao;
 
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component
-public class ActivityRepository {
+public class ActivityRepository /*implements Repository<ActivityModel>*/ {
 
     //analogicznie do ActivityDao, tylko z hibernate
     //dla frameworkow sa repository (tu dla springa), dla innych dao
@@ -23,7 +25,7 @@ public class ActivityRepository {
     }
 
 
-    public ActivityModel create(ActivityModel activityModel) {
+    public Optional<ActivityModel> create(ActivityModel activityModel) {
         LOGGER.info("create(" + activityModel + ")");
         Session session = SESSION_FACTORY.openSession();
         session.getTransaction().begin();
@@ -31,10 +33,10 @@ public class ActivityRepository {
         session.getTransaction().commit();
         LOGGER.info("create(...) = " + activityModel);
 
-        return activityModel;
+        return Optional.of(activityModel);
     }
 
-    public ActivityModel read(Long id) {
+    public Optional<ActivityModel> read(Long id) {
         LOGGER.info("read(" + id + ")");
         Session session = SESSION_FACTORY.openSession();
         session.getTransaction().begin();
@@ -42,10 +44,10 @@ public class ActivityRepository {
         session.getTransaction().commit();
         LOGGER.info("read(...) = " + activityModel);
 
-        return activityModel;
+        return Optional.of(activityModel);
     }
 
-    public ActivityModel update(ActivityModel activityModel) {
+    public Optional<ActivityModel> update(ActivityModel activityModel) {
         LOGGER.info("update(" + activityModel + ")");
         Session session = SESSION_FACTORY.openSession();
         session.getTransaction().begin();
@@ -53,7 +55,7 @@ public class ActivityRepository {
         session.getTransaction().commit();
         LOGGER.info("update(...) = " + activityModel);
 
-        return activityModel;
+        return Optional.of(activityModel);
     }
 
     public boolean delete(ActivityModel activityModel) {

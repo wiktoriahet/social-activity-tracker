@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 
+import java.util.Optional;
+
 @SpringBootTest
 class ActivityRepositoryTest {
     private static final String ACTIVITY_LABEL_RUNNING = "Running";
@@ -24,10 +26,11 @@ class ActivityRepositoryTest {
         activityModel.setLabel(ACTIVITY_LABEL_TENNIS);
 
         //when
-        ActivityModel createdActivityModel = activityRepository.create(activityModel);
+        Optional<ActivityModel> createdActivityModel = activityRepository.create(activityModel);
 
         //then
         Assertions.assertNotNull(createdActivityModel, "createdActivityModel is null");
+        Assertions.assertTrue(createdActivityModel.isPresent(), "createdActivityModel is not present");
 
     }
 }

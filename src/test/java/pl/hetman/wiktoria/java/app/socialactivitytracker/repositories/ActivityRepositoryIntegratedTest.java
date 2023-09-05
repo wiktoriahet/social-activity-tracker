@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 
+import java.util.Optional;
+
 @SpringBootTest
 class ActivityRepositoryIntegratedTest {
 
@@ -23,10 +25,10 @@ class ActivityRepositoryIntegratedTest {
         //given
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_LABEL_KAYAKING);
-        ActivityModel createdActivityModel = activityRepository.create(activityModel);
+        Optional<ActivityModel> createdActivityModel = activityRepository.create(activityModel);
 
         //when
-        ActivityModel readActivityModel = activityRepository.read(createdActivityModel.getId());
+        Optional<ActivityModel> readActivityModel = activityRepository.read(createdActivityModel.get().getId());
 
         //then
         Assertions.assertNotNull(readActivityModel, "readActivityModel is null");
@@ -44,16 +46,16 @@ class ActivityRepositoryIntegratedTest {
         updateActivityModel.setLabel(ACTIVITY_LABEL_KAYAKING);
 
         //when
-        ActivityModel createdActivityModel = activityRepository.create(createActivityModel);
-        updateActivityModel.setId(createdActivityModel.getId());
-        ActivityModel updatedActivityModel = activityRepository.update(updateActivityModel);
+        Optional<ActivityModel> optionalCreatedActivityModel = activityRepository.create(createActivityModel);
+        updateActivityModel.setId(optionalCreatedActivityModel.get().getId());
+        Optional<ActivityModel> updatedActivityModel = activityRepository.update(updateActivityModel);
 
         //then
         Assertions.assertAll(
                 () -> Assertions.assertNotNull(updatedActivityModel, "updatedActivityModel is null"),
-                () -> Assertions.assertNotNull(updatedActivityModel.getId(), "updatedActivityModel.getId() is null"),
-                () -> Assertions.assertEquals(ACTIVITY_LABEL_KAYAKING, updatedActivityModel.getLabel(), "updatedActivityModel.getLabel() is not equal"),
-                () -> Assertions.assertNotEquals(ACTIVITY_LABEL_RUNNING, updatedActivityModel.getLabel(), "updatedActivityModel.getLabel() is equal")
+                () -> Assertions.assertNotNull(updatedActivityModel.get().getId(), "updatedActivityModel.getId() is null"),
+                () -> Assertions.assertEquals(ACTIVITY_LABEL_KAYAKING, updatedActivityModel.get().getLabel(), "updatedActivityModel.getLabel() is not equal"),
+                () -> Assertions.assertNotEquals(ACTIVITY_LABEL_RUNNING, updatedActivityModel.get().getLabel(), "updatedActivityModel.getLabel() is equal")
         );
 
     }
@@ -63,10 +65,10 @@ class ActivityRepositoryIntegratedTest {
         //given
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_LABEL_KAYAKING);
-        ActivityModel createdActivityModel = activityRepository.create(activityModel);
+        Optional<ActivityModel> optionalCreatedActivityModel = activityRepository.create(activityModel);
 
         //when
-        boolean deletedActivityRepository = activityRepository.delete(createdActivityModel);
+        boolean deletedActivityRepository = activityRepository.delete(optionalCreatedActivityModel.get());
 
         //then
         Assertions.assertEquals(true, deletedActivityRepository, "Is false");
