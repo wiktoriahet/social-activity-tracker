@@ -11,9 +11,9 @@ public interface Repository <T>{
 
     Optional<T> read(Long id) throws ActivityException;
 
-    void update(T t) throws ActivityException;
+    Optional<T> update(T t) throws ActivityException;
 
-    void delete(T t) throws ActivityException;
+    boolean delete(T t) throws ActivityException;
 
     List<T> list ()throws ActivityException;
 

@@ -3,7 +3,7 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.controller;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.MissingLabelActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.service.ActivityService;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.services.ActivityService;
 
 import java.util.logging.Logger;
 

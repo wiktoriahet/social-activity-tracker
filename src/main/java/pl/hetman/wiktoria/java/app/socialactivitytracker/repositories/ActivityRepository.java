@@ -4,15 +4,17 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.Dao;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component
-public class ActivityRepository /*implements Repository<ActivityModel>*/ {
+public class ActivityRepository implements Repository<ActivityModel> {
 
     //analogicznie do ActivityDao, tylko z hibernate
     //dla frameworkow sa repository (tu dla springa), dla innych dao
@@ -81,6 +83,11 @@ public class ActivityRepository /*implements Repository<ActivityModel>*/ {
         }
         LOGGER.info("delete(...) = " + activityModel);
         return deleted;
+    }
+
+    @Override
+    public List<ActivityModel> list() throws ActivityException {
+        return null;
     }
 
 }
