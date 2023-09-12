@@ -1,8 +1,9 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.service;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.services;
 
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.ActivityDao;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.repositories.ActivityRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,17 +13,24 @@ public class ActivityService {
 
     private static final Logger LOGGER = Logger.getLogger(ActivityService.class.getName());
 
-    private final ActivityDao activityDao; //zależność
+//    private final ActivityDao activityDao; //zależność
+//
+//    public ActivityService(ActivityDao activityDao) { //wstrzykiwanie zależności za pomocą konstr.
+//        this.activityDao = activityDao;
+//    }
 
-    public ActivityService(ActivityDao activityDao) { //wstrzykiwanie zależności za pomocą konstr.
-        this.activityDao = activityDao;
+    private final ActivityRepository activityRepository;
+
+    public ActivityService(ActivityRepository activityRepository) {
+        this.activityRepository = activityRepository;
     }
 
     // C - create
     public ActivityModel create(ActivityModel activityModel) throws ActivityException {
         LOGGER.info("create(" + activityModel + ")");
         Optional<ActivityModel> optionalActivityModel =
-                activityDao.create(activityModel); //delegacja
+                //activityDao.create(activityModel); //delegacja
+                activityRepository.create(activityModel);
         ActivityModel createdActivityModel = optionalActivityModel.orElseThrow(
                 () -> new ActivityException("Unable to create activity"));
 

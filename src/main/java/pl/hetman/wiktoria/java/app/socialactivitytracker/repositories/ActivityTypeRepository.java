@@ -1,17 +1,19 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.repositories;
 
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.Dao;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class UserRepository implements Repository<ActivityModel> {
+public class ActivityTypeRepository implements Repository<ActivityModel>{
 
-    private static final Logger LOGGER = Logger.getLogger(UserRepository.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ActivityTypeRepository.class.getName());
     private static final SessionFactory SESSION_FACTORY;
 
     static {
