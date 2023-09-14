@@ -1,15 +1,12 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.repositories;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.util.logging.Logger;
-
-import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
 @Component
 //@Scope(value = SCOPE_PROTOTYPE)

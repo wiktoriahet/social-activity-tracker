@@ -1,4 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.repositories;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository;
 
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 

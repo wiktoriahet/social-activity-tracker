@@ -4,8 +4,8 @@
 //import org.junit.jupiter.api.Test;
 //import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 //import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-//import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.ActivityDao;
-//import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.UserDao;
+//import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.ActivityDao;
+//import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.UserDao;
 //
 //class ActivityServiceTest {
 //

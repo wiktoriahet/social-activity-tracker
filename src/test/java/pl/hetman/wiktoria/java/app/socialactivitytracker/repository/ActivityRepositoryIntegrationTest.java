@@ -1,10 +1,11 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.repositories;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.repository;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.ActivityRepository;
 
 import java.util.Optional;
 

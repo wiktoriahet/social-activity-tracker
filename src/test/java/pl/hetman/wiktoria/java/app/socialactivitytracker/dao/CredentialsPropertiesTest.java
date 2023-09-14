@@ -2,8 +2,7 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.io.IOException;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.CredentialsProperties;
 
 class CredentialsPropertiesTest {
 

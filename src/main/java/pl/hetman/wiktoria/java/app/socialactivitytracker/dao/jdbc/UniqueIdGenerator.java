@@ -1,4 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc;
 
 import java.util.Random;
 import java.util.logging.Logger;
