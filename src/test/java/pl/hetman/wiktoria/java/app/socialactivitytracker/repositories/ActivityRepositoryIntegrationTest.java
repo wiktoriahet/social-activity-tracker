@@ -9,12 +9,12 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.Activi
 import java.util.Optional;
 
 @SpringBootTest
-class ActivityRepositoryIntegratedTest {
+class ActivityRepositoryIntegrationTest {
 
     private static final String ACTIVITY_LABEL_RUNNING = "Running";
     public static final String ACTIVITY_LABEL_KAYAKING = "Kayaking";
 
-    public ActivityRepositoryIntegratedTest() {
+    public ActivityRepositoryIntegrationTest() {
     }
 
     @Autowired
