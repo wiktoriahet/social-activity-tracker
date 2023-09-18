@@ -55,12 +55,12 @@ class ActivityTypeDataJpaRepositoryTest {
         activityTypeModel.setCustom(true);
         activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
         ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
-        ActivityTypeModel updateActivityModel = new ActivityTypeModel();
-        updateActivityModel.setName(ACTIVITY_NAME_FISHING);
-        updateActivityModel.setId(savedActivityTypeModel.getId());
+        ActivityTypeModel updateActivityTypeModel = new ActivityTypeModel();
+        updateActivityTypeModel.setName(ACTIVITY_NAME_FISHING);
+        updateActivityTypeModel.setId(savedActivityTypeModel.getId());
 
         //when
-        ActivityTypeModel updatedActivityTypeModel = activityTypeDataJpaRepository.save(updateActivityModel);
+        ActivityTypeModel updatedActivityTypeModel = activityTypeDataJpaRepository.save(updateActivityTypeModel);
 
         //then
         Assertions.assertNotNull(updatedActivityTypeModel, "updatedActivityTypeModel is null");
