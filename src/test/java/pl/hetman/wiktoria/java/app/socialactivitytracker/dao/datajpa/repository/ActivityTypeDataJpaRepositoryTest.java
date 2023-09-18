@@ -50,11 +50,26 @@ class ActivityTypeDataJpaRepositoryTest {
 
     @Test
     public void update(){
+        //given
+        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+        activityTypeModel.setCustom(true);
+        activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
+        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
+        ActivityTypeModel updateActivityModel = new ActivityTypeModel();
+        updateActivityModel.setName(ACTIVITY_NAME_FISHING);
+        updateActivityModel.setId(savedActivityTypeModel.getId());
+
+        //when
+        ActivityTypeModel updatedActivityTypeModel = activityTypeDataJpaRepository.save(updateActivityModel);
+
+        //then
+        Assertions.assertNotNull(updatedActivityTypeModel, "updatedActivityTypeModel is null");
+
 
     }
 
-    @Test
-    public void delete(){
-
-    }
+//    @Test
+//    public void delete(){
+//
+//    }
 }
