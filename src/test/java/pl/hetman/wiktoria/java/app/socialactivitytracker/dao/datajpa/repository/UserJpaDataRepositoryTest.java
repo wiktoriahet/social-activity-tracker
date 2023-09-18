@@ -42,12 +42,27 @@ class UserJpaDataRepositoryTest {
         UserModel userModel = new UserModel();
         UserModel savedUserModel = userJpaDataRepository.save(userModel);
 
-
         //when
         UserModel readUserModel = userJpaDataRepository.getReferenceById(savedUserModel.getId());
 
         //then
         Assertions.assertNotNull(readUserModel, "readUserModel is null");
+
+    }
+
+    @Test
+    public void update(){
+        //given
+        UserModel userModel = new UserModel();
+        UserModel savedUserModel = userJpaDataRepository.save(userModel);
+        UserModel updateUserModel = new UserModel();
+        updateUserModel.setId(savedUserModel.getId());
+
+        //when
+        UserModel updatedUserModel = userJpaDataRepository.save(updateUserModel);
+
+        //then
+        Assertions.assertNotNull(updatedUserModel, "updatedUserModel is null");
 
     }
 }
