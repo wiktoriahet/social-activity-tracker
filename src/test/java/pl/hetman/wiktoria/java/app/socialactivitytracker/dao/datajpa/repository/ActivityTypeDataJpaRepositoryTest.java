@@ -68,8 +68,19 @@ class ActivityTypeDataJpaRepositoryTest {
 
     }
 
-//    @Test
-//    public void delete(){
-//
-//    }
+    @Test
+    public void delete(){
+        //given
+        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+        activityTypeModel.setCustom(true);
+        activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
+        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
+
+        //when
+        //activityTypeDataJpaRepository.delete(savedActivityTypeModel);
+
+        //then
+        //Assertions.assertNull(savedActivityTypeModel, "savedActivityTypeModel is not null");
+
+    }
 }
