@@ -34,6 +34,17 @@ class ActivityTypeDataJpaRepositoryTest {
 
     @Test
     public void read(){
+        //given
+        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+        activityTypeModel.setCustom(true);
+        activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
+        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
+
+        //when
+        ActivityTypeModel readActivityTypeModel = activityTypeDataJpaRepository.getReferenceById(savedActivityTypeModel.getId());
+
+        //then
+        Assertions.assertNotNull(readActivityTypeModel, "readActivityTypeModel is null");
 
     }
 
