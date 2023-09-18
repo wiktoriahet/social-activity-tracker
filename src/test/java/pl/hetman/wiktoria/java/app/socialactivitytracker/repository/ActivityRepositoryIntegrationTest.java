@@ -13,13 +13,10 @@ import java.util.Optional;
 class ActivityRepositoryIntegrationTest {
 
     private static final String ACTIVITY_LABEL_RUNNING = "Running";
-    public static final String ACTIVITY_LABEL_KAYAKING = "Kayaking";
-
-    public ActivityRepositoryIntegrationTest() {
-    }
+    private static final String ACTIVITY_LABEL_KAYAKING = "Kayaking";
 
     @Autowired
-    ActivityRepository activityRepository;
+    private ActivityRepository activityRepository;
 
     @Test
     void createAndRead(){

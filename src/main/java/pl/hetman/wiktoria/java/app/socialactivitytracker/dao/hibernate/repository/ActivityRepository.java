@@ -30,7 +30,7 @@ public class ActivityRepository implements Repository<ActivityModel> {
         LOGGER.info("create(" + activityModel + ")");
         Session session = SESSION_FACTORY.openSession();
         session.getTransaction().begin();
-        session.persist(activityModel);
+        session.save(activityModel);
         session.getTransaction().commit();
         LOGGER.info("create(...) = " + activityModel);
 
