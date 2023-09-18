@@ -35,4 +35,19 @@ class UserJpaDataRepositoryTest {
         Assertions.assertNotNull(savedUserModel, "savedUserModel is null");
 
     }
+
+    @Test
+    public void read(){
+        //given
+        UserModel userModel = new UserModel();
+        UserModel savedUserModel = userJpaDataRepository.save(userModel);
+
+
+        //when
+        UserModel readUserModel = userJpaDataRepository.getReferenceById(savedUserModel.getId());
+
+        //then
+        Assertions.assertNotNull(readUserModel, "readUserModel is null");
+
+    }
 }
