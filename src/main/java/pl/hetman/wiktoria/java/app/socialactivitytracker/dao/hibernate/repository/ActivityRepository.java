@@ -1,4 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.repositories;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -6,7 +6,6 @@ import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Component;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.Dao;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,7 +30,7 @@ public class ActivityRepository implements Repository<ActivityModel> {
         LOGGER.info("create(" + activityModel + ")");
         Session session = SESSION_FACTORY.openSession();
         session.getTransaction().begin();
-        session.persist(activityModel);
+        session.save(activityModel);
         session.getTransaction().commit();
         LOGGER.info("create(...) = " + activityModel);
 

@@ -1,6 +1,5 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;

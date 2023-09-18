@@ -1,11 +1,9 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

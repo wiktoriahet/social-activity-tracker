@@ -1,4 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc;
 
 import org.springframework.stereotype.Component;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;

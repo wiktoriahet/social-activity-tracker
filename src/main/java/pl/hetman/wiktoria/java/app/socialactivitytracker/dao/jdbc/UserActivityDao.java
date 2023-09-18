@@ -1,4 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc;
 
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.UserException;

@@ -1,4 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc;
 
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 

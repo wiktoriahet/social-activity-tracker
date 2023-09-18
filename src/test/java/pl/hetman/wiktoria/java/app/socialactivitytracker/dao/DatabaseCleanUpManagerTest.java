@@ -2,7 +2,7 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
 import org.junit.jupiter.api.Test;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.DatabaseCleanUpManager;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.DatabaseCleanUpManager;
 
 class DatabaseCleanUpManagerTest {
 

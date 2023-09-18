@@ -1,8 +1,7 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.services;
 
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.ActivityDao;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.repositories.ActivityRepository;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.ActivityRepository;
 
 import java.util.List;
 import java.util.logging.Logger;
