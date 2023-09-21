@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
@@ -41,7 +43,7 @@ class ActivityTypeDataJpaRepositoryTest {
         ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
 
         //when
-        ActivityTypeModel readActivityTypeModel = activityTypeDataJpaRepository.getReferenceById(savedActivityTypeModel.getId());
+        Optional<ActivityTypeModel> readActivityTypeModel = activityTypeDataJpaRepository.findById(savedActivityTypeModel.getId());
 
         //then
         Assertions.assertNotNull(readActivityTypeModel, "readActivityTypeModel is null");
@@ -68,19 +70,19 @@ class ActivityTypeDataJpaRepositoryTest {
 
     }
 
-//    @Test
-//    public void delete(){
-//        //given
-//        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-//        activityTypeModel.setCustom(true);
-//        activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
-//        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
-//
-//        //when
-//        //activityTypeDataJpaRepository.delete(savedActivityTypeModel);
-//
-//        //then
-//        //Assertions.assertNull(savedActivityTypeModel, "savedActivityTypeModel is not null");
-//
-//    }
+    @Test
+    public void delete(){
+        //given
+        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+        activityTypeModel.setCustom(true);
+        activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
+
+        //when
+        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
+        activityTypeDataJpaRepository.delete(savedActivityTypeModel);
+
+        //then
+        //Assertions.assertNull(savedActivityTypeModel, "savedActivityTypeModel is not null");
+
+    }
 }
