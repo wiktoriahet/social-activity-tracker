@@ -13,13 +13,15 @@ import java.time.LocalDateTime;
 class ActivityDataJpaRepositoryTest {
 
     private static final String ACTIVITY_LABEL_FISHING = "Fishing";
+    private static final String ACTIVITY_NAME_FISHING = "Fishing on Friday";
+
     private static final String ACTIVITY_LABEL_SNORKELING = "Snorkeling";
 
     @Autowired
     private ActivityDataJpaRepository activityDataJpaRepository;
 
     @Test
-    public void create(){
+    public void create() {
         //given
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_LABEL_FISHING);
@@ -34,7 +36,32 @@ class ActivityDataJpaRepositoryTest {
     }
 
     @Test
-    public void read(){
+    //@Transactional
+    public void createWithType() {
+        //given
+        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+        activityTypeModel.setName(ACTIVITY_NAME_FISHING);
+
+        ActivityModel activityModel = new ActivityModel();
+        activityModel.setLabel(ACTIVITY_LABEL_FISHING);
+        activityModel.setStop(LocalDateTime.now());
+        activityModel.chooseActivityType(activityTypeModel);
+
+        //when
+        ActivityModel savedActivityModel = activityDataJpaRepository.save(activityModel);
+
+        //then
+        Assertions.assertNotNull(savedActivityModel, "savedActivityModel is null");
+
+        Assertions.assertAll(
+                () -> Assertions.assertNotNull(savedActivityModel, "savedActivityModel is null")
+                //() -> Assertions.assertNotNull(activityTypeModel.getId(), "activityTypeModel.getId() is null")
+        );
+
+    }
+
+    @Test
+    public void read() {
         //given
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_LABEL_FISHING);
@@ -50,7 +77,7 @@ class ActivityDataJpaRepositoryTest {
     }
 
     @Test
-    public void update(){
+    public void update() {
         //given
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_LABEL_FISHING);

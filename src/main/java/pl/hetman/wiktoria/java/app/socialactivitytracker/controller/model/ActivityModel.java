@@ -1,5 +1,6 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class ActivityModel {
 //    @OneToOne(mappedBy="activityModel")
 //    private UserModel user; // <- przez to null pointer
 
-    @OneToOne(mappedBy="activityModel")
+    @OneToOne(cascade = CascadeType.PERSIST)
     private ActivityTypeModel activityType; // <- przez to null pointer
 
     @Column(name = "START")
