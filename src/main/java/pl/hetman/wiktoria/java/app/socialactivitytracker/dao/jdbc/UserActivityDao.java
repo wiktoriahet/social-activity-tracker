@@ -22,7 +22,7 @@ public class UserActivityDao {
                 () -> new UserException("User not found"));
 
         ActivityModel activityModel = new ActivityModel();
-        activityModel.setUser(userModel);
+//        activityModel.setUser(userModel);
 
         activityDao.create(activityModel);
     }

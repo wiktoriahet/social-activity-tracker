@@ -20,10 +20,13 @@ public class ActivityModel {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne(mappedBy="activityModel")
-    private UserModel user; // <- przez to null pointer
+
+//    @OneToOne(mappedBy="activityModel")
+//    private UserModel user; // <- przez to null pointer
+
     @OneToOne(mappedBy="activityModel")
     private ActivityTypeModel activityType; // <- przez to null pointer
+
     @Column(name = "START")
     private LocalDateTime start;
     @Column(name = "STOP")
@@ -36,10 +39,10 @@ public class ActivityModel {
     public ActivityModel() {
     }
 
-    public ActivityModel(UserModel user, ActivityTypeModel activityType) {
-        this.user = user;
-        this.activityType = activityType;
-    }
+//    public ActivityModel(UserModel user, ActivityTypeModel activityType) {
+//        this.user = user;
+//        this.activityType = activityType;
+//    }
 
     public void chooseActivityType(ActivityTypeModel activityType) {
         LOGGER.info("chooseActivityType(" + activityType + ")");
@@ -100,13 +103,13 @@ public class ActivityModel {
         this.id = id;
     }
 
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
+//    public UserModel getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(UserModel user) {
+//        this.user = user;
+//    }
 
     public ActivityTypeModel getActivityType() {
         return activityType;
@@ -146,7 +149,6 @@ public class ActivityModel {
     public String toString() {
         return "ActivityModel{" +
                 "id=" + id +
-                ", user=" + user +
                 ", activityType=" + activityType +
                 ", start=" + start +
                 ", stop=" + stop +
