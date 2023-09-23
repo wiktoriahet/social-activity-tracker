@@ -8,8 +8,6 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.Activi
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class ActivityTypeDataJpaRepositoryTest {
 

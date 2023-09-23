@@ -1,9 +1,11 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -20,10 +22,14 @@ public class ActivityModel {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne(mappedBy="activityModel")
-    private UserModel user; // <- przez to null pointer
-    @OneToOne(mappedBy="activityModel")
+
+//    @OneToOne(mappedBy="activityModel")
+//    private UserModel user; // <- przez to null pointer
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ACTIVITY_TYPE_ID")
     private ActivityTypeModel activityType; // <- przez to null pointer
+
     @Column(name = "START")
     private LocalDateTime start;
     @Column(name = "STOP")
@@ -36,10 +42,10 @@ public class ActivityModel {
     public ActivityModel() {
     }
 
-    public ActivityModel(UserModel user, ActivityTypeModel activityType) {
-        this.user = user;
-        this.activityType = activityType;
-    }
+//    public ActivityModel(UserModel user, ActivityTypeModel activityType) {
+//        this.user = user;
+//        this.activityType = activityType;
+//    }
 
     public void chooseActivityType(ActivityTypeModel activityType) {
         LOGGER.info("chooseActivityType(" + activityType + ")");
@@ -100,13 +106,13 @@ public class ActivityModel {
         this.id = id;
     }
 
-    public UserModel getUser() {
-        return user;
-    }
-
-    public void setUser(UserModel user) {
-        this.user = user;
-    }
+//    public UserModel getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(UserModel user) {
+//        this.user = user;
+//    }
 
     public ActivityTypeModel getActivityType() {
         return activityType;
@@ -146,7 +152,6 @@ public class ActivityModel {
     public String toString() {
         return "ActivityModel{" +
                 "id=" + id +
-                ", user=" + user +
                 ", activityType=" + activityType +
                 ", start=" + start +
                 ", stop=" + stop +
