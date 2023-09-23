@@ -5,6 +5,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -26,6 +27,7 @@ public class ActivityModel {
 //    private UserModel user; // <- przez to null pointer
 
     @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "ACTIVITY_TYPE_ID")
     private ActivityTypeModel activityType; // <- przez to null pointer
 
     @Column(name = "START")

@@ -33,11 +33,11 @@ class ActivityDataJpaRepositoryIntegrationTest {
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_LABEL_FISHING);
         activityModel.setStop(LocalDateTime.now());
-        //activityModel.chooseActivityType(activityTypeModel);
+        activityModel.chooseActivityType(activityTypeModel);
 
         //when
-        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
-        activityModel.chooseActivityType(savedActivityTypeModel);
+//        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
+//        activityModel.chooseActivityType(savedActivityTypeModel);
         ActivityModel savedActivityModel = activityDataJpaRepository.save(activityModel);
 
         //then
