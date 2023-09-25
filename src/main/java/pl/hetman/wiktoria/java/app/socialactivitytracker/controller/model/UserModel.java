@@ -3,7 +3,10 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+
+import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
@@ -13,9 +16,9 @@ public class UserModel {
     @GeneratedValue
     private Long id;
 
-//    @OneToOne
+    @OneToMany
 //    @JoinColumn(name = "user_model")
-//    private ActivityModel activityModel;
+    private Set<ActivityModel> activities;
 
     public Long getId() {
         return id;
@@ -25,9 +28,13 @@ public class UserModel {
         this.id = id;
     }
 
-//    public void setActivityModel(ActivityModel activityModel) {
-//        this.activityModel = activityModel;
-//    }
+    public Set<ActivityModel> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<ActivityModel> activities) {
+        this.activities = activities;
+    }
 
     @Override
     public String toString() {
