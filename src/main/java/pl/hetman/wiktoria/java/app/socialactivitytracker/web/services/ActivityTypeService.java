@@ -1,11 +1,13 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.web.services;
 
+import org.springframework.stereotype.Service;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityTypeEntity;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.DefaultActivityRepository;
 
 import java.util.List;
 import java.util.logging.Logger;
 
+@Service
 public class ActivityTypeService {
     private static final Logger LOGGER = Logger.getLogger(ActivityTypeService.class.getName());
 

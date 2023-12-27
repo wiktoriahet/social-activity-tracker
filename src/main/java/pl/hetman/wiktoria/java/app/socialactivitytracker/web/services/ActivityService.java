@@ -1,5 +1,6 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.web.services;
 
+import org.springframework.stereotype.Service;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.DefaultActivityRepository;
@@ -8,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
+@Service
 public class ActivityService {
 
     private static final Logger LOGGER = Logger.getLogger(ActivityService.class.getName());
