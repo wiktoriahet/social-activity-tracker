@@ -2,8 +2,8 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 
 import org.junit.jupiter.api.Test;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityTypeEntity;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.DefaultActivityDao;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.UserDao;
 
@@ -15,18 +15,18 @@ class DefaultActivityDaoTest {
         UserDao userDao = new UserDao();
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
 
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        activityTypeModel.setName("swimming");
-        activityTypeModel.setCustom(false);
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
+        activityTypeEntity.setName("swimming");
+        activityTypeEntity.setCustom(false);
 
-        ActivityModel activityModel = new ActivityModel();
-        activityModel.setId(1L);
-        activityModel.chooseActivityType(activityTypeModel);
-        activityModel.begin();
-        activityModel.setLabel("today's swimming");
+        ActivityEntity activityEntity = new ActivityEntity();
+        activityEntity.setId(1L);
+        activityEntity.chooseActivityType(activityTypeEntity);
+        activityEntity.begin();
+        activityEntity.setLabel("today's swimming");
 
         //when
-        defaultActivityDao.create(activityModel);
+        defaultActivityDao.create(activityEntity);
 
         //then
 
@@ -38,20 +38,20 @@ class DefaultActivityDaoTest {
         UserDao userDao = new UserDao();
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
 
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        activityTypeModel.setName("running");
-        activityTypeModel.setCustom(false);
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
+        activityTypeEntity.setName("running");
+        activityTypeEntity.setCustom(false);
 
-        ActivityModel activityModel = new ActivityModel();
-        activityModel.setId(2L);
-        activityModel.chooseActivityType(activityTypeModel);
-        activityModel.begin();
-        activityModel.end();
-        String duration = activityModel.duration();
-        activityModel.setLabel("today's running");
+        ActivityEntity activityEntity = new ActivityEntity();
+        activityEntity.setId(2L);
+        activityEntity.chooseActivityType(activityTypeEntity);
+        activityEntity.begin();
+        activityEntity.end();
+        String duration = activityEntity.duration();
+        activityEntity.setLabel("today's running");
 
         //when
-        defaultActivityDao.create(activityModel);
+        defaultActivityDao.create(activityEntity);
 
         //then
 
@@ -63,20 +63,20 @@ class DefaultActivityDaoTest {
         UserDao userDao = new UserDao();
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
 
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        activityTypeModel.setName("flying");
-        activityTypeModel.setCustom(true);
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
+        activityTypeEntity.setName("flying");
+        activityTypeEntity.setCustom(true);
 
-        ActivityModel activityModel = new ActivityModel();
-        activityModel.setId(1L);
-        activityModel.chooseActivityType(activityTypeModel);
-        activityModel.begin();
-        activityModel.end();
-        String duration = activityModel.duration();
-        activityModel.setLabel("today's flying");
+        ActivityEntity activityEntity = new ActivityEntity();
+        activityEntity.setId(1L);
+        activityEntity.chooseActivityType(activityTypeEntity);
+        activityEntity.begin();
+        activityEntity.end();
+        String duration = activityEntity.duration();
+        activityEntity.setLabel("today's flying");
 
         //when
-        defaultActivityDao.update(activityModel);
+        defaultActivityDao.update(activityEntity);
 
         //then
 
@@ -85,12 +85,12 @@ class DefaultActivityDaoTest {
     @Test
     void delete() throws ActivityException{
         //given
-        ActivityModel activityModel = new ActivityModel();
+        ActivityEntity activityEntity = new ActivityEntity();
         UserDao userDao = new UserDao();
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
-        activityModel.setId(1L);
+        activityEntity.setId(1L);
         //when
-        defaultActivityDao.delete(activityModel);
+        defaultActivityDao.delete(activityEntity);
 
         //then
 

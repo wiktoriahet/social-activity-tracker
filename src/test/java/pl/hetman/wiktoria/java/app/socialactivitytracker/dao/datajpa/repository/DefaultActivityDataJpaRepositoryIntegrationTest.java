@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityTypeEntity;
 
 import java.time.LocalDateTime;
 
@@ -27,25 +27,25 @@ class DefaultActivityDataJpaRepositoryIntegrationTest {
     //@Transactional
     public void createWithType() {
         //given
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        activityTypeModel.setName(ACTIVITY_NAME_FISHING);
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
+        activityTypeEntity.setName(ACTIVITY_NAME_FISHING);
 
-        ActivityModel activityModel = new ActivityModel();
-        activityModel.setLabel(ACTIVITY_LABEL_FISHING);
-        activityModel.setStop(LocalDateTime.now());
-        activityModel.chooseActivityType(activityTypeModel);
+        ActivityEntity activityEntity = new ActivityEntity();
+        activityEntity.setLabel(ACTIVITY_LABEL_FISHING);
+        activityEntity.setStop(LocalDateTime.now());
+        activityEntity.chooseActivityType(activityTypeEntity);
 
         //when
 //        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
 //        activityModel.chooseActivityType(savedActivityTypeModel);
-        ActivityModel savedActivityModel = defaultActivityDataJpaRepository.save(activityModel);
+        ActivityEntity savedActivityEntity = defaultActivityDataJpaRepository.save(activityEntity);
 
         //then
-        Assertions.assertNotNull(savedActivityModel, "savedActivityModel is null");
+        Assertions.assertNotNull(savedActivityEntity, "savedActivityModel is null");
 
         Assertions.assertAll(
-                () -> Assertions.assertNotNull(savedActivityModel, "savedActivityModel is null"),
-                () -> Assertions.assertNotNull(activityTypeModel.getId(), "activityTypeModel.getId() is null")
+                () -> Assertions.assertNotNull(savedActivityEntity, "savedActivityModel is null"),
+                () -> Assertions.assertNotNull(activityTypeEntity.getId(), "activityTypeModel.getId() is null")
         );
 
     }

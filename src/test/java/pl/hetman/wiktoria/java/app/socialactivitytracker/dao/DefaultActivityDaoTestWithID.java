@@ -3,8 +3,8 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityTypeEntity;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.DefaultActivityDao;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.UserDao;
 
@@ -17,22 +17,22 @@ class DefaultActivityDaoTestWithID {
         //given
         UserDao userDao = new UserDao();
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
 
-        activityTypeModel.setName("cycling");
-        activityTypeModel.setCustom(false);
+        activityTypeEntity.setName("cycling");
+        activityTypeEntity.setCustom(false);
 
-        ActivityModel activityModel = new ActivityModel();
+        ActivityEntity activityEntity = new ActivityEntity();
 
         //activityModel.setId(UniqueIdGenerator.generateId());
-        activityModel.chooseActivityType(activityTypeModel);
-        activityModel.begin();
-        activityModel.end();
-        String duration = activityModel.duration();
-        activityModel.setLabel("today's cycling");
+        activityEntity.chooseActivityType(activityTypeEntity);
+        activityEntity.begin();
+        activityEntity.end();
+        String duration = activityEntity.duration();
+        activityEntity.setLabel("today's cycling");
 
         //when
-        Optional<ActivityModel> savedActivityModel = defaultActivityDao.create(activityModel);
+        Optional<ActivityEntity> savedActivityModel = defaultActivityDao.create(activityEntity);
         //ActivityModel savedActivityModel = activityDao.create(activityModel);
 
         //then

@@ -4,7 +4,7 @@
 //import org.junit.jupiter.api.Test;
 //import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 //import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.MissingLabelActivityException;
-//import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
+//import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityModel;
 //import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.ActivityDao;
 //import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.UserDao;
 //import pl.hetman.wiktoria.java.app.socialactivitytracker.service.ActivityService;

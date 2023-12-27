@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityTypeEntity;
 
 import java.util.Optional;
 
@@ -20,20 +20,20 @@ public class ActivityTypeJpaDataRepositoryIntegrationTest {
     @Test
     public void delete(){
         //given
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        activityTypeModel.setCustom(true);
-        activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
+        activityTypeEntity.setCustom(true);
+        activityTypeEntity.setName(ACTIVITY_NAME_SNORKELING);
 
         //when
-        ActivityTypeModel savedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(activityTypeModel);
-        defaultActivityTypeDataJpaRepository.delete(savedActivityTypeModel);
-        Optional<ActivityTypeModel> optionalReadActivityTypeModel =
-                defaultActivityTypeDataJpaRepository.findById(savedActivityTypeModel.getId());
-        ActivityTypeModel readActivityTypeModel = optionalReadActivityTypeModel.orElse(null);
+        ActivityTypeEntity savedActivityTypeEntity = defaultActivityTypeDataJpaRepository.save(activityTypeEntity);
+        defaultActivityTypeDataJpaRepository.delete(savedActivityTypeEntity);
+        Optional<ActivityTypeEntity> optionalReadActivityTypeModel =
+                defaultActivityTypeDataJpaRepository.findById(savedActivityTypeEntity.getId());
+        ActivityTypeEntity readActivityTypeEntity = optionalReadActivityTypeModel.orElse(null);
 
 
         //then
-        Assertions.assertNull(readActivityTypeModel, "savedActivityTypeModel is not null");
+        Assertions.assertNull(readActivityTypeEntity, "savedActivityTypeModel is not null");
 
     }
 }

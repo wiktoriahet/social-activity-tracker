@@ -3,8 +3,8 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityTypeEntity;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.DefaultActivityDao;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.UserDao;
 
@@ -22,7 +22,7 @@ class DefaultActivityDaoIntegrationTest {
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
 
         //when
-        Optional<ActivityModel> readActivityModel = defaultActivityDao.read(-99L);
+        Optional<ActivityEntity> readActivityModel = defaultActivityDao.read(-99L);
 
         //then
         Assertions.assertNotNull(readActivityModel, "activityModel is not null");
@@ -34,13 +34,13 @@ class DefaultActivityDaoIntegrationTest {
         //given
         UserDao userDao = new UserDao();
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
-        ActivityModel activityModel = new ActivityModel();
-        activityModel.setLabel(ACTIVITY_MODEL_LABEL_KAYAK);
+        ActivityEntity activityEntity = new ActivityEntity();
+        activityEntity.setLabel(ACTIVITY_MODEL_LABEL_KAYAK);
 
         //when
 
-        Optional<ActivityModel> savedActivityModel = defaultActivityDao.create(activityModel);
-        Optional<ActivityModel> readActivityModel = defaultActivityDao.read(savedActivityModel.get().getId());
+        Optional<ActivityEntity> savedActivityModel = defaultActivityDao.create(activityEntity);
+        Optional<ActivityEntity> readActivityModel = defaultActivityDao.read(savedActivityModel.get().getId());
         System.out.println(readActivityModel);
 
         //then
@@ -57,32 +57,32 @@ class DefaultActivityDaoIntegrationTest {
         //utworzona aktywność do zapisania
         UserDao userDao = new UserDao();
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
 
-        activityTypeModel.setName("walking");
-        activityTypeModel.setCustom(true);
+        activityTypeEntity.setName("walking");
+        activityTypeEntity.setCustom(true);
 
-        ActivityModel activityModel = new ActivityModel();
+        ActivityEntity activityEntity = new ActivityEntity();
 
-        activityModel.setId(4L);
-        activityModel.chooseActivityType(activityTypeModel);
-        activityModel.begin();
-        activityModel.end();
-        activityModel.duration();
-        activityModel.setLabel("today's walking");
+        activityEntity.setId(4L);
+        activityEntity.chooseActivityType(activityTypeEntity);
+        activityEntity.begin();
+        activityEntity.end();
+        activityEntity.duration();
+        activityEntity.setLabel("today's walking");
 
-        defaultActivityDao.create(activityModel);
+        defaultActivityDao.create(activityEntity);
 
         //dane do modyfikacji
-        activityTypeModel.setName("jogging");
-        activityTypeModel.setCustom(true);
-        activityModel.setLabel("today's jogging");
-        activityModel.begin();
-        activityModel.end();
-        activityModel.duration();
+        activityTypeEntity.setName("jogging");
+        activityTypeEntity.setCustom(true);
+        activityEntity.setLabel("today's jogging");
+        activityEntity.begin();
+        activityEntity.end();
+        activityEntity.duration();
 
         //when
-        defaultActivityDao.update(activityModel);
+        defaultActivityDao.update(activityEntity);
 
         //then
 
@@ -92,25 +92,25 @@ class DefaultActivityDaoIntegrationTest {
     void delete() throws ActivityException {
         //given
         //utworzona aktywność do usunięcia
-        ActivityModel activityModel = new ActivityModel();
+        ActivityEntity activityEntity = new ActivityEntity();
         UserDao userDao = new UserDao();
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
 
-        activityTypeModel.setName("flying");
-        activityTypeModel.setCustom(true);
+        activityTypeEntity.setName("flying");
+        activityTypeEntity.setCustom(true);
 
-        activityModel.setId(5L);
-        activityModel.chooseActivityType(activityTypeModel);
-        activityModel.begin();
-        activityModel.end();
-        activityModel.duration();
-        activityModel.setLabel("today's flying");
+        activityEntity.setId(5L);
+        activityEntity.chooseActivityType(activityTypeEntity);
+        activityEntity.begin();
+        activityEntity.end();
+        activityEntity.duration();
+        activityEntity.setLabel("today's flying");
 
-        defaultActivityDao.create(activityModel);
+        defaultActivityDao.create(activityEntity);
 
         //when
-        defaultActivityDao.delete(activityModel);
+        defaultActivityDao.delete(activityEntity);
 
         //then
     }

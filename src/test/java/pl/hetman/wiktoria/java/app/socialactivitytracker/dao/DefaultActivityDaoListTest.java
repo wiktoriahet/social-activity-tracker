@@ -3,7 +3,7 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.DefaultActivityDao;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.UserDao;
 
@@ -19,10 +19,10 @@ class DefaultActivityDaoListTest {
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
 
         //when
-        List<ActivityModel> activityModelList = defaultActivityDao.list();
+        List<ActivityEntity> activityEntityList = defaultActivityDao.list();
 
         //then
-        Assertions.assertNotNull(activityModelList, "activityModelList is null");
+        Assertions.assertNotNull(activityEntityList, "activityModelList is null");
 
 
     }

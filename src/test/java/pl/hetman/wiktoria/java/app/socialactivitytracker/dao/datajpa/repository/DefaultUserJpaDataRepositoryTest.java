@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.UserEntity;
 
 @SpringBootTest
 class DefaultUserJpaDataRepositoryTest {
@@ -18,47 +18,47 @@ class DefaultUserJpaDataRepositoryTest {
     @Test
     public void create() {
         //given
-        UserModel userModel = new UserModel();
+        UserEntity userEntity = new UserEntity();
 //        ActivityModel activityModel = new ActivityModel();
 //        activityModel.setLabel(ACTIVITY_NAME_SNORKELING);
 //        userModel.setActivityModel(activityModel);
         //hibernate onetoone!!!!
 
         //when
-        UserModel savedUserModel = defaultUserJpaDataRepository.save(userModel);
+        UserEntity savedUserEntity = defaultUserJpaDataRepository.save(userEntity);
 
         //then
-        Assertions.assertNotNull(savedUserModel, "savedUserModel is null");
+        Assertions.assertNotNull(savedUserEntity, "savedUserModel is null");
 
     }
 
     @Test
     public void read(){
         //given
-        UserModel userModel = new UserModel();
-        UserModel savedUserModel = defaultUserJpaDataRepository.save(userModel);
+        UserEntity userEntity = new UserEntity();
+        UserEntity savedUserEntity = defaultUserJpaDataRepository.save(userEntity);
 
         //when
-        UserModel readUserModel = defaultUserJpaDataRepository.getReferenceById(savedUserModel.getId());
+        UserEntity readUserEntity = defaultUserJpaDataRepository.getReferenceById(savedUserEntity.getId());
 
         //then
-        Assertions.assertNotNull(readUserModel, "readUserModel is null");
+        Assertions.assertNotNull(readUserEntity, "readUserModel is null");
 
     }
 
     @Test
     public void update(){
         //given
-        UserModel userModel = new UserModel();
-        UserModel savedUserModel = defaultUserJpaDataRepository.save(userModel);
-        UserModel updateUserModel = new UserModel();
-        updateUserModel.setId(savedUserModel.getId());
+        UserEntity userEntity = new UserEntity();
+        UserEntity savedUserEntity = defaultUserJpaDataRepository.save(userEntity);
+        UserEntity updateUserEntity = new UserEntity();
+        updateUserEntity.setId(savedUserEntity.getId());
 
         //when
-        UserModel updatedUserModel = defaultUserJpaDataRepository.save(updateUserModel);
+        UserEntity updatedUserEntity = defaultUserJpaDataRepository.save(updateUserEntity);
 
         //then
-        Assertions.assertNotNull(updatedUserModel, "updatedUserModel is null");
+        Assertions.assertNotNull(updatedUserEntity, "updatedUserModel is null");
 
     }
 }

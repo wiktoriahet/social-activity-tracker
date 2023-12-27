@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityTypeEntity;
 
 import java.util.Optional;
 
@@ -20,28 +20,28 @@ class DefaultActivityTypeDataJpaRepositoryTest {
     @Test
     public void create() {
         //given
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        activityTypeModel.setCustom(true);
-        activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
+        activityTypeEntity.setCustom(true);
+        activityTypeEntity.setName(ACTIVITY_NAME_SNORKELING);
 
         //when
-        ActivityTypeModel savedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(activityTypeModel);
+        ActivityTypeEntity savedActivityTypeEntity = defaultActivityTypeDataJpaRepository.save(activityTypeEntity);
 
         //then
-        Assertions.assertNotNull(savedActivityTypeModel, "savedActivityTypeModel is null");
+        Assertions.assertNotNull(savedActivityTypeEntity, "savedActivityTypeModel is null");
 
     }
 
     @Test
     public void read(){
         //given
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        activityTypeModel.setCustom(true);
-        activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
-        ActivityTypeModel savedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(activityTypeModel);
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
+        activityTypeEntity.setCustom(true);
+        activityTypeEntity.setName(ACTIVITY_NAME_SNORKELING);
+        ActivityTypeEntity savedActivityTypeEntity = defaultActivityTypeDataJpaRepository.save(activityTypeEntity);
 
         //when
-        Optional<ActivityTypeModel> readActivityTypeModel = defaultActivityTypeDataJpaRepository.findById(savedActivityTypeModel.getId());
+        Optional<ActivityTypeEntity> readActivityTypeModel = defaultActivityTypeDataJpaRepository.findById(savedActivityTypeEntity.getId());
 
         //then
         Assertions.assertNotNull(readActivityTypeModel, "readActivityTypeModel is null");
@@ -51,19 +51,19 @@ class DefaultActivityTypeDataJpaRepositoryTest {
     @Test
     public void update(){
         //given
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        activityTypeModel.setCustom(true);
-        activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
-        ActivityTypeModel savedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(activityTypeModel);
-        ActivityTypeModel updateActivityTypeModel = new ActivityTypeModel();
-        updateActivityTypeModel.setName(ACTIVITY_NAME_FISHING);
-        updateActivityTypeModel.setId(savedActivityTypeModel.getId());
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
+        activityTypeEntity.setCustom(true);
+        activityTypeEntity.setName(ACTIVITY_NAME_SNORKELING);
+        ActivityTypeEntity savedActivityTypeEntity = defaultActivityTypeDataJpaRepository.save(activityTypeEntity);
+        ActivityTypeEntity updateActivityTypeEntity = new ActivityTypeEntity();
+        updateActivityTypeEntity.setName(ACTIVITY_NAME_FISHING);
+        updateActivityTypeEntity.setId(savedActivityTypeEntity.getId());
 
         //when
-        ActivityTypeModel updatedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(updateActivityTypeModel);
+        ActivityTypeEntity updatedActivityTypeEntity = defaultActivityTypeDataJpaRepository.save(updateActivityTypeEntity);
 
         //then
-        Assertions.assertNotNull(updatedActivityTypeModel, "updatedActivityTypeModel is null");
+        Assertions.assertNotNull(updatedActivityTypeEntity, "updatedActivityTypeModel is null");
 
 
     }
@@ -71,13 +71,13 @@ class DefaultActivityTypeDataJpaRepositoryTest {
     @Test
     public void delete(){
         //given
-        ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        activityTypeModel.setCustom(true);
-        activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
+        ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
+        activityTypeEntity.setCustom(true);
+        activityTypeEntity.setName(ACTIVITY_NAME_SNORKELING);
 
         //when
-        ActivityTypeModel savedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(activityTypeModel);
-        defaultActivityTypeDataJpaRepository.delete(savedActivityTypeModel);
+        ActivityTypeEntity savedActivityTypeEntity = defaultActivityTypeDataJpaRepository.save(activityTypeEntity);
+        defaultActivityTypeDataJpaRepository.delete(savedActivityTypeEntity);
 
         //then
         //Assertions.assertNull(savedActivityTypeModel, "savedActivityTypeModel is not null");

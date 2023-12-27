@@ -1,39 +1,39 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.repository.entity;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 
-class ActivityModelTest {
+class ActivityEntityTest {
     // TODO: 10.07.2023 poprawione LocalDateTime z ActivityModel
     @Test
     void begin() {
         //given
-        ActivityModel activityModel = new ActivityModel();
+        ActivityEntity activityEntity = new ActivityEntity();
 
         //when
-        activityModel.begin();
+        activityEntity.begin();
 
         //then
         //Assertions.assertNotNull(activityModel.start, "activity start is null");
-        Assertions.assertNotNull(activityModel.getStart(), "activity start is null");
+        Assertions.assertNotNull(activityEntity.getStart(), "activity start is null");
 
     }
 
     @Test
     void end() {
         //given
-        ActivityModel activityModel = new ActivityModel();
+        ActivityEntity activityEntity = new ActivityEntity();
 
         //when
-        activityModel.end();
+        activityEntity.end();
 
         //then
         //Assertions.assertNotNull(activityModel.stop, "activity stop is null");
-        Assertions.assertNotNull(activityModel.getStop(), "activity stop is null");
+        Assertions.assertNotNull(activityEntity.getStop(), "activity stop is null");
 
 
     }
@@ -59,16 +59,16 @@ class ActivityModelTest {
     @Test
     void difference(){
         //given
-        ActivityModel activityModel = new ActivityModel();
+        ActivityEntity activityEntity = new ActivityEntity();
 //        activityModel.start = LocalDateTime.of(2023, Month.MARCH, 22, 11, 30, 10);
 //        activityModel.stop = LocalDateTime.of(2023, Month.MARCH, 22, 11, 31, 9);
         LocalDateTime start = LocalDateTime.of(2023, Month.MARCH, 22, 11, 30, 10);
-        activityModel.setStart(start);
+        activityEntity.setStart(start);
         LocalDateTime stop = LocalDateTime.of(2023, Month.MARCH, 22, 12, 30, 10);
-        activityModel.setStop(stop);
+        activityEntity.setStop(stop);
 
         //when
-        String difference = activityModel.duration();
+        String difference = activityEntity.duration();
 
         //then
         Assertions.assertNotNull(difference, "Difference is null");

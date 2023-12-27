@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.DefaultActivityRepository;
 
 import java.util.Optional;
@@ -23,11 +23,11 @@ class DefaultActivityRepositoryTest {
     @Test
     void create() {
         //given
-        ActivityModel activityModel = new ActivityModel();
-        activityModel.setLabel(ACTIVITY_LABEL_TENNIS);
+        ActivityEntity activityEntity = new ActivityEntity();
+        activityEntity.setLabel(ACTIVITY_LABEL_TENNIS);
 
         //when
-        Optional<ActivityModel> createdActivityModel = defaultActivityRepository.create(activityModel);
+        Optional<ActivityEntity> createdActivityModel = defaultActivityRepository.create(activityEntity);
 
         //then
         Assertions.assertNotNull(createdActivityModel, "createdActivityModel is null");

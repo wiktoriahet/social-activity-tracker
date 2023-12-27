@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityTypeEntity;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.UserEntity;
 
 @SpringBootTest
 class DefaultUserJpaDataRepositoryIntegrationTest {
@@ -22,26 +22,26 @@ class DefaultUserJpaDataRepositoryIntegrationTest {
 //    @Rollback(value = false)
     public void create() {
         //given
-        ActivityTypeModel fishingActivityTypeModel = new ActivityTypeModel();
-        fishingActivityTypeModel.setName(ACTIVITY_NAME_FISHING);
+        ActivityTypeEntity fishingActivityTypeEntity = new ActivityTypeEntity();
+        fishingActivityTypeEntity.setName(ACTIVITY_NAME_FISHING);
 
-        ActivityModel fishingActivityModel = new ActivityModel();
-        fishingActivityModel.chooseActivityType(fishingActivityTypeModel);
-        fishingActivityModel.setLabel("Karp");
+        ActivityEntity fishingActivityEntity = new ActivityEntity();
+        fishingActivityEntity.chooseActivityType(fishingActivityTypeEntity);
+        fishingActivityEntity.setLabel("Karp");
 
-        UserModel userModel = new UserModel();
-        userModel.setUsername("root");
+        UserEntity userEntity = new UserEntity();
+        userEntity.setUsername("root");
 //        userModel.setActivities(Set.of(fishingActivityModel));
-        userModel.addActivity(fishingActivityModel);
+        userEntity.addActivity(fishingActivityEntity);
 
         //when
-        UserModel savedUserModel = defaultUserJpaDataRepository.save(userModel);
+        UserEntity savedUserEntity = defaultUserJpaDataRepository.save(userEntity);
 
         //then
         Assertions.assertAll(
-                () -> Assertions.assertNotNull(savedUserModel, "savedUserModel is null"),
-                () -> Assertions.assertNotNull(savedUserModel.getId(), "savedUserModel ID is null"),
-                () -> Assertions.assertEquals(1, savedUserModel.getActivities().size())
+                () -> Assertions.assertNotNull(savedUserEntity, "savedUserModel is null"),
+                () -> Assertions.assertNotNull(savedUserEntity.getId(), "savedUserModel ID is null"),
+                () -> Assertions.assertEquals(1, savedUserEntity.getActivities().size())
         );
     }
 }
