@@ -1,24 +1,13 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.web.controller.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-
-@Entity
-@Table(name = "ACTIVITY_TYPES")
 public class ActivityTypeModel {
 
-    @Id
-    @GeneratedValue
     private Long id;
-
     private String name;
     private boolean custom;
 
-//    @OneToOne
-//    @JoinColumn(name = "activity_model")
-//    private ActivityModel activityModel;
+    public ActivityTypeModel() {
+    }
 
     public Long getId() {
         return id;
@@ -43,10 +32,6 @@ public class ActivityTypeModel {
     public void setCustom(boolean custom) {
         this.custom = custom;
     }
-
-//    public void setActivityModel(ActivityModel activityModel) {
-//        this.activityModel = activityModel;
-//    }
 
     @Override
     public String toString() {

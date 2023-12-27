@@ -1,9 +1,9 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.controller;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.web.controller;
 
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.MissingLabelActivityException;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.services.ActivityService;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.web.services.ActivityService;
 
 import java.util.logging.Logger;
 
@@ -18,16 +18,16 @@ public class ActivityController {
     }
 
     // C - create
-    public ActivityModel create(ActivityModel activityModel) throws ActivityException {
-        LOGGER.info("create(" + activityModel + ")");
-        if (activityModel != null) {
-            if (activityModel.getLabel() == null) {
+    public ActivityEntity create(ActivityEntity activityEntity) throws ActivityException {
+        LOGGER.info("create(" + activityEntity + ")");
+        if (activityEntity != null) {
+            if (activityEntity.getLabel() == null) {
                 throw new MissingLabelActivityException("Label is null");
             }
         }
-        ActivityModel createdActivityModel = activityService.create(activityModel);
-        LOGGER.info("create(...) = " + createdActivityModel);
-        return createdActivityModel;
+        ActivityEntity createdActivityEntity = activityService.create(activityEntity);
+        LOGGER.info("create(...) = " + createdActivityEntity);
+        return createdActivityEntity;
     }
 }
 

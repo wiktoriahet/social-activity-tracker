@@ -1,6 +1,6 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.services;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.web.services;
 
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityTypeEntity;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.DefaultActivityRepository;
 
 import java.util.List;
@@ -22,22 +22,22 @@ public class ActivityTypeService {
     }
 
     // C - create
-    public ActivityTypeModel create(ActivityTypeModel activityTypeModel) {
+    public ActivityTypeEntity create(ActivityTypeEntity activityTypeEntity) {
         return null;
     }
     // R - read
-    public ActivityTypeModel read(Long id) {
+    public ActivityTypeEntity read(Long id) {
         return null;
     }
     // U - update
-    public ActivityTypeModel update(Long id) {
+    public ActivityTypeEntity update(Long id) {
         return null;
     }
     // D - delete
     public void delete(Long id) {
     }
     // L - list
-    public List<ActivityTypeModel> list() {
+    public List<ActivityTypeEntity> list() {
         return null;
     }
 

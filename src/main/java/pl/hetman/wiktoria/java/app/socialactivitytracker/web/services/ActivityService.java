@@ -1,7 +1,7 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.services;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.web.services;
 
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.DefaultActivityRepository;
 
 import java.util.List;
@@ -25,25 +25,25 @@ public class ActivityService {
     }
 
     // C - create
-    public ActivityModel create(ActivityModel activityModel) throws ActivityException {
-        LOGGER.info("create(" + activityModel + ")");
-        Optional<ActivityModel> optionalActivityModel =
+    public ActivityEntity create(ActivityEntity activityEntity) throws ActivityException {
+        LOGGER.info("create(" + activityEntity + ")");
+        Optional<ActivityEntity> optionalActivityModel =
                 //activityDao.create(activityModel); //delegacja
-                defaultActivityRepository.create(activityModel);
-        ActivityModel createdActivityModel = optionalActivityModel.orElseThrow(
+                defaultActivityRepository.create(activityEntity);
+        ActivityEntity createdActivityEntity = optionalActivityModel.orElseThrow(
                 () -> new ActivityException("Unable to create activity"));
 
-        LOGGER.info("create(...) = " + createdActivityModel);
-        return createdActivityModel;
+        LOGGER.info("create(...) = " + createdActivityEntity);
+        return createdActivityEntity;
     }
 
     // R - read
-    public ActivityModel read(Long id) {
+    public ActivityEntity read(Long id) {
         return null;
     }
 
     // U - update
-    public ActivityModel update(Long id, ActivityModel activityModel) {
+    public ActivityEntity update(Long id, ActivityEntity activityEntity) {
         return null;
     }
 
@@ -52,7 +52,7 @@ public class ActivityService {
     }
 
     // L - list
-    public List<ActivityModel> list() {
+    public List<ActivityEntity> list() {
         return null;
     }
 

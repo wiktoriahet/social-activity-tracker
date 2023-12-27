@@ -1,4 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -16,20 +16,20 @@ import java.util.logging.Logger;
 
 @Entity
 @Table(name = "ACTIVITIES")
-public class ActivityModel {
+public class ActivityEntity {
 
-    private static final Logger LOGGER = Logger.getLogger(ActivityModel.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(ActivityEntity.class.getName());
 
     @Id
     @GeneratedValue
     private Long id;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    private UserModel user;
+    private UserEntity user;
 
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "ACTIVITY_TYPE_ID")
-    private ActivityTypeModel activityType; // <- przez to null pointer
+    private ActivityTypeEntity activityType; // <- przez to null pointer
 
     @Column(name = "START")
     private LocalDateTime start;
@@ -40,10 +40,10 @@ public class ActivityModel {
     @Column(name = "LABEL")
     private String label;
 
-    public ActivityModel() {
+    public ActivityEntity() {
     }
 
-    public void chooseActivityType(ActivityTypeModel activityType) {
+    public void chooseActivityType(ActivityTypeEntity activityType) {
         LOGGER.info("chooseActivityType(" + activityType + ")");
         this.activityType = activityType;
         LOGGER.info("chooseActivityType(...)");
@@ -102,15 +102,15 @@ public class ActivityModel {
         this.id = id;
     }
 
-    public UserModel getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(UserModel user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 
-    public ActivityTypeModel getActivityType() {
+    public ActivityTypeEntity getActivityType() {
         return activityType;
     }
 

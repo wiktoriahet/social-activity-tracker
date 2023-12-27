@@ -2,13 +2,13 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.reposito
 
 import org.hibernate.SessionFactory;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-public class UserActivityRepository implements DefaultRepository<ActivityModel> {
+public class UserActivityRepository implements DefaultRepository<ActivityEntity> {
 
     private static final Logger LOGGER = Logger.getLogger(UserActivityRepository.class.getName());
     private static final SessionFactory SESSION_FACTORY;
@@ -18,36 +18,36 @@ public class UserActivityRepository implements DefaultRepository<ActivityModel> 
     }
 
     @Override
-    public Optional<ActivityModel> create(ActivityModel activityModel) throws ActivityException {
-        LOGGER.info("create(" + activityModel + ")");
-        LOGGER.info("create(...) = " + activityModel);
-        return Optional.of(activityModel);
+    public Optional<ActivityEntity> create(ActivityEntity activityEntity) throws ActivityException {
+        LOGGER.info("create(" + activityEntity + ")");
+        LOGGER.info("create(...) = " + activityEntity);
+        return Optional.of(activityEntity);
     }
 
     @Override
-    public Optional<ActivityModel> read(Long id) throws ActivityException {
+    public Optional<ActivityEntity> read(Long id) throws ActivityException {
         LOGGER.info("read(" + id + ")");
         LOGGER.info("read(...)");
         return Optional.empty();
     }
 
     @Override
-    public Optional<ActivityModel> update(ActivityModel activityModel) throws ActivityException {
-        LOGGER.info("update(" + activityModel + ")");
-        LOGGER.info("update(...) = " + activityModel);
+    public Optional<ActivityEntity> update(ActivityEntity activityEntity) throws ActivityException {
+        LOGGER.info("update(" + activityEntity + ")");
+        LOGGER.info("update(...) = " + activityEntity);
 
-        return Optional.of(activityModel);
+        return Optional.of(activityEntity);
     }
 
     @Override
-    public boolean delete(ActivityModel activityModel) throws ActivityException {
-        LOGGER.info("delete(" + activityModel + ")");
+    public boolean delete(ActivityEntity activityEntity) throws ActivityException {
+        LOGGER.info("delete(" + activityEntity + ")");
         LOGGER.info("delete(...)");
         return true;
     }
 
     @Override
-    public List<ActivityModel> list() throws ActivityException {
+    public List<ActivityEntity> list() throws ActivityException {
         return null;
     }
 }

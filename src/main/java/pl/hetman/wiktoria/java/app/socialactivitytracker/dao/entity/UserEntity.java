@@ -1,4 +1,4 @@
-package pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model;
+package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -12,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "USERS")
-public class UserModel {
+public class UserEntity {
 
     @Id
     @GeneratedValue
@@ -23,11 +23,11 @@ public class UserModel {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.PERSIST)
 //    @JoinColumn(name = "USER_ID")
-    private Set<ActivityModel> activities = new HashSet<>();
+    private Set<ActivityEntity> activities = new HashSet<>();
 
-    public void addActivity(ActivityModel activityModel) {
-        this.activities.add(activityModel);
-        activityModel.setUser(this);
+    public void addActivity(ActivityEntity activityEntity) {
+        this.activities.add(activityEntity);
+        activityEntity.setUser(this);
     }
 
     public Long getId() {
@@ -54,11 +54,11 @@ public class UserModel {
         this.password = password;
     }
 
-    public Set<ActivityModel> getActivities() {
+    public Set<ActivityEntity> getActivities() {
         return activities;
     }
 
-    public void setActivities(Set<ActivityModel> activities) {
+    public void setActivities(Set<ActivityEntity> activities) {
         this.activities = activities;
     }
 

@@ -2,8 +2,8 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc;
 
 import org.springframework.stereotype.Component;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityTypeEntity;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component
-public class DefaultActivityDao implements DefaultDao<ActivityModel> {
+public class DefaultActivityDao implements DefaultDao<ActivityEntity> {
 
     private static final Logger LOGGER = Logger.getLogger(DefaultActivityDao.class.getName());
 
@@ -28,9 +28,9 @@ public class DefaultActivityDao implements DefaultDao<ActivityModel> {
     }
 
     @Override
-    public Optional<ActivityModel> create(ActivityModel activityModel) throws ActivityException {
+    public Optional<ActivityEntity> create(ActivityEntity activityEntity) throws ActivityException {
 
-        LOGGER.info("create(" + activityModel + ")");
+        LOGGER.info("create(" + activityEntity + ")");
         String queryString = "INSERT INTO ACTIVITIES" +
 //                "(id, name, custom, label, start, stop, duration, user_id)" +
 //                " VALUES(?,?,?,?,?,?,?,?)";
@@ -49,21 +49,21 @@ public class DefaultActivityDao implements DefaultDao<ActivityModel> {
             //try-with-resource
 
             preparedStatement.setLong(1, generatedId);
-            if (activityModel.getActivityType() != null) {
-                preparedStatement.setString(2, activityModel.getActivityType().getName());
-                preparedStatement.setString(3, String.valueOf(activityModel.getActivityType().isCustom()));
+            if (activityEntity.getActivityType() != null) {
+                preparedStatement.setString(2, activityEntity.getActivityType().getName());
+                preparedStatement.setString(3, String.valueOf(activityEntity.getActivityType().isCustom()));
             } else {
                 preparedStatement.setString(2, null);
                 preparedStatement.setString(3, null);
             }
-            preparedStatement.setString(4, activityModel.getLabel());
-            if (activityModel.getStart() != null) {
-                preparedStatement.setString(5, activityModel.getStart().toString());
+            preparedStatement.setString(4, activityEntity.getLabel());
+            if (activityEntity.getStart() != null) {
+                preparedStatement.setString(5, activityEntity.getStart().toString());
             } else {
                 preparedStatement.setString(5, null);
             }
             preparedStatement.setString(6, null);
-            preparedStatement.setString(7, activityModel.getDuration());
+            preparedStatement.setString(7, activityEntity.getDuration());
             preparedStatement.executeUpdate();
         } catch (RuntimeException e) {
             throw new ActivityException("General database problem while creating activity", e);
@@ -75,16 +75,16 @@ public class DefaultActivityDao implements DefaultDao<ActivityModel> {
             throw new ActivityException("Database problem while creating activity", e);
         }
 
-        activityModel.setId(generatedId);
-        Optional<ActivityModel> optionalActivityModel = Optional.of(activityModel);
+        activityEntity.setId(generatedId);
+        Optional<ActivityEntity> optionalActivityModel = Optional.of(activityEntity);
         LOGGER.info("create(...)=" + optionalActivityModel);
         return optionalActivityModel;
     }
 
     @Override
-    public void update(ActivityModel activityModel) throws ActivityException {
+    public void update(ActivityEntity activityEntity) throws ActivityException {
 
-        LOGGER.info("update(" + activityModel + ")");
+        LOGGER.info("update(" + activityEntity + ")");
 
         String queryString = "UPDATE ACTIVITIES " +
                 "SET name = ?," +
@@ -98,27 +98,27 @@ public class DefaultActivityDao implements DefaultDao<ActivityModel> {
         try (Connection connection = ConnectionManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
-            if (activityModel != null) {
-                if (activityModel.getActivityType() != null) {
-                    preparedStatement.setString(1, activityModel.getActivityType().getName());
-                    preparedStatement.setString(2, String.valueOf(activityModel.getActivityType().isCustom()));
+            if (activityEntity != null) {
+                if (activityEntity.getActivityType() != null) {
+                    preparedStatement.setString(1, activityEntity.getActivityType().getName());
+                    preparedStatement.setString(2, String.valueOf(activityEntity.getActivityType().isCustom()));
                 } else {
                     preparedStatement.setString(1, null);
                     preparedStatement.setString(2, null);
                 }
-                preparedStatement.setString(3, activityModel.getLabel());
-                if (activityModel.getStart() != null) {
-                    preparedStatement.setString(4, activityModel.getStart().toString());
+                preparedStatement.setString(3, activityEntity.getLabel());
+                if (activityEntity.getStart() != null) {
+                    preparedStatement.setString(4, activityEntity.getStart().toString());
                 } else {
                     preparedStatement.setString(4, null);
                 }
-                if (activityModel.getStop() != null) {
-                    preparedStatement.setString(5, activityModel.getStop().toString());
+                if (activityEntity.getStop() != null) {
+                    preparedStatement.setString(5, activityEntity.getStop().toString());
                 } else {
                     preparedStatement.setString(5, null);
                 }
-                preparedStatement.setString(6, activityModel.getDuration());
-                preparedStatement.setLong(7, activityModel.getId());
+                preparedStatement.setString(6, activityEntity.getDuration());
+                preparedStatement.setLong(7, activityEntity.getId());
                 preparedStatement.executeUpdate();
             }
 
@@ -130,9 +130,9 @@ public class DefaultActivityDao implements DefaultDao<ActivityModel> {
     }
 
     @Override
-    public void delete(ActivityModel activityModel) throws ActivityException {
+    public void delete(ActivityEntity activityEntity) throws ActivityException {
 
-        LOGGER.info("delete(" + activityModel + ")");
+        LOGGER.info("delete(" + activityEntity + ")");
 
         String queryString = "DELETE ACTIVITIES " +
                 "WHERE id = ?";
@@ -140,7 +140,7 @@ public class DefaultActivityDao implements DefaultDao<ActivityModel> {
         try (Connection connection = ConnectionManager.getInstance().getConnection();
              PreparedStatement preparedStatement = connection.prepareStatement(queryString)) {
 
-            preparedStatement.setLong(1, activityModel.getId());
+            preparedStatement.setLong(1, activityEntity.getId());
             preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
@@ -150,7 +150,7 @@ public class DefaultActivityDao implements DefaultDao<ActivityModel> {
     }
 
     @Override
-    public Optional<ActivityModel> read(Long id) throws ActivityException {
+    public Optional<ActivityEntity> read(Long id) throws ActivityException {
 
         LOGGER.info("read(" + id + ")");
 
@@ -170,13 +170,13 @@ public class DefaultActivityDao implements DefaultDao<ActivityModel> {
                 String custom = resultSet.getString("CUSTOM");
                 String label = resultSet.getString("LABEL");
 
-                ActivityModel activityModel = new ActivityModel();
-                activityModel.setId(readId);
-                activityModel.setLabel(label);
+                ActivityEntity activityEntity = new ActivityEntity();
+                activityEntity.setId(readId);
+                activityEntity.setLabel(label);
 
                 LOGGER.info("read(...)");
 
-                return Optional.of(activityModel);
+                return Optional.of(activityEntity);
             }
 
         } catch (SQLException e) {
@@ -188,10 +188,10 @@ public class DefaultActivityDao implements DefaultDao<ActivityModel> {
     }
 
     @Override
-    public List<ActivityModel> list() throws ActivityException {
+    public List<ActivityEntity> list() throws ActivityException {
         LOGGER.info("list()");
 
-        List<ActivityModel> activityModels = new ArrayList<>();
+        List<ActivityEntity> activityEntities = new ArrayList<>();
         String queryString = "SELECT * FROM ACTIVITIES;";
 
         try (Connection connection = ConnectionManager.getInstance().getConnection();
@@ -200,22 +200,22 @@ public class DefaultActivityDao implements DefaultDao<ActivityModel> {
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
 
-                ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-                ActivityModel activityModel = new ActivityModel();
+                ActivityTypeEntity activityTypeEntity = new ActivityTypeEntity();
+                ActivityEntity activityEntity = new ActivityEntity();
 
-                activityModel.setId(resultSet.getLong(1));
-                activityTypeModel.setName(resultSet.getString(2));
-                activityTypeModel.setCustom(resultSet.getBoolean(3));
-                activityModel.chooseActivityType(activityTypeModel);
-                activityModels.add(activityModel);
+                activityEntity.setId(resultSet.getLong(1));
+                activityTypeEntity.setName(resultSet.getString(2));
+                activityTypeEntity.setCustom(resultSet.getBoolean(3));
+                activityEntity.chooseActivityType(activityTypeEntity);
+                activityEntities.add(activityEntity);
             }
 
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Database problem while listing activities", e);
         }
 
-        LOGGER.info("list(...)" + activityModels);
+        LOGGER.info("list(...)" + activityEntities);
 
-        return activityModels;
+        return activityEntities;
     }
 }
