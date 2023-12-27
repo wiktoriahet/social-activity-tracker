@@ -5,20 +5,20 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.ActivityRepository;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.DefaultActivityRepository;
 
 import java.util.Optional;
 
 @SpringBootTest
-class ActivityRepositoryTest {
+class DefaultActivityRepositoryTest {
     private static final String ACTIVITY_LABEL_RUNNING = "Running";
     public static final String ACTIVITY_LABEL_TENNIS = "Playing tennis";
 
-    public ActivityRepositoryTest() {
+    public DefaultActivityRepositoryTest() {
     }
 
     @Autowired
-    ActivityRepository activityRepository;
+    DefaultActivityRepository defaultActivityRepository;
 
     @Test
     void create() {
@@ -27,7 +27,7 @@ class ActivityRepositoryTest {
         activityModel.setLabel(ACTIVITY_LABEL_TENNIS);
 
         //when
-        Optional<ActivityModel> createdActivityModel = activityRepository.create(activityModel);
+        Optional<ActivityModel> createdActivityModel = defaultActivityRepository.create(activityModel);
 
         //then
         Assertions.assertNotNull(createdActivityModel, "createdActivityModel is null");

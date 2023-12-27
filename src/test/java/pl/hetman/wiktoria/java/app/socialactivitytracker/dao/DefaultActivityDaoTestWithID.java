@@ -5,40 +5,41 @@ import org.junit.jupiter.api.Test;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.ActivityDao;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.DefaultActivityDao;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.UserDao;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-class ActivityDaoOptionalsTest {
-
-    public static final String ACTIVITY_MODEL_LABEL_DANCE = "today's dancing";
+class DefaultActivityDaoTestWithID {
 
     @Test
     void save() throws ActivityException {
         //given
         UserDao userDao = new UserDao();
-        ActivityDao activityDao = new ActivityDao(userDao);
-
+        DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
-        activityTypeModel.setName("playing zbijak");
+
+        activityTypeModel.setName("cycling");
         activityTypeModel.setCustom(false);
 
         ActivityModel activityModel = new ActivityModel();
+
+        //activityModel.setId(UniqueIdGenerator.generateId());
         activityModel.chooseActivityType(activityTypeModel);
         activityModel.begin();
-        activityModel.setLabel("today's zbijak");
+        activityModel.end();
+        String duration = activityModel.duration();
+        activityModel.setLabel("today's cycling");
 
         //when
-        Optional<ActivityModel> savedActivity = activityDao.create(activityModel);
+        Optional<ActivityModel> savedActivityModel = defaultActivityDao.create(activityModel);
+        //ActivityModel savedActivityModel = activityDao.create(activityModel);
 
         //then
+
         Assertions.assertAll(
-                ()-> assertTrue(savedActivity.isPresent(), "Optional is not present"),
-                ()-> assertNotNull(savedActivity, "Optional is null")
+                ()->Assertions.assertNotNull(savedActivityModel, "activityModel is Null"),
+                ()->Assertions.assertNotNull(savedActivityModel.get().getId(), "ID is Null")
         );
     }
-
 }

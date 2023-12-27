@@ -17,13 +17,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component
-public class ActivityDao implements Dao<ActivityModel> {
+public class DefaultActivityDao implements DefaultDao<ActivityModel> {
 
-    private static final Logger LOGGER = Logger.getLogger(ActivityDao.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DefaultActivityDao.class.getName());
 
     private UserDao userDao;
 
-    public ActivityDao(UserDao userDao) {
+    public DefaultActivityDao(UserDao userDao) {
         this.userDao = userDao;
     }
 

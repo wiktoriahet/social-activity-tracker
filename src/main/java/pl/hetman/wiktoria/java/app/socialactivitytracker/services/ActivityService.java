@@ -2,7 +2,7 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.services;
 
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.ActivityRepository;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.DefaultActivityRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,10 +18,10 @@ public class ActivityService {
 //        this.activityDao = activityDao;
 //    }
 
-    private final ActivityRepository activityRepository;
+    private final DefaultActivityRepository defaultActivityRepository;
 
-    public ActivityService(ActivityRepository activityRepository) {
-        this.activityRepository = activityRepository;
+    public ActivityService(DefaultActivityRepository defaultActivityRepository) {
+        this.defaultActivityRepository = defaultActivityRepository;
     }
 
     // C - create
@@ -29,7 +29,7 @@ public class ActivityService {
         LOGGER.info("create(" + activityModel + ")");
         Optional<ActivityModel> optionalActivityModel =
                 //activityDao.create(activityModel); //delegacja
-                activityRepository.create(activityModel);
+                defaultActivityRepository.create(activityModel);
         ActivityModel createdActivityModel = optionalActivityModel.orElseThrow(
                 () -> new ActivityException("Unable to create activity"));
 

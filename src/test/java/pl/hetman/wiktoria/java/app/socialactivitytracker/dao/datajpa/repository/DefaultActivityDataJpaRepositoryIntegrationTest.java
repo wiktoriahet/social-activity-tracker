@@ -10,7 +10,7 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.Activi
 import java.time.LocalDateTime;
 
 @SpringBootTest
-class ActivityDataJpaRepositoryIntegrationTest {
+class DefaultActivityDataJpaRepositoryIntegrationTest {
 
     private static final String ACTIVITY_LABEL_FISHING = "Fishing";
     private static final String ACTIVITY_NAME_FISHING = "Fishing on Friday";
@@ -18,10 +18,10 @@ class ActivityDataJpaRepositoryIntegrationTest {
     private static final String ACTIVITY_LABEL_SNORKELING = "Snorkeling";
 
     @Autowired
-    private ActivityDataJpaRepository activityDataJpaRepository;
+    private DefaultActivityDataJpaRepository defaultActivityDataJpaRepository;
 
     @Autowired
-    private ActivityTypeDataJpaRepository activityTypeDataJpaRepository;
+    private DefaultActivityTypeDataJpaRepository defaultActivityTypeDataJpaRepository;
 
     @Test
     //@Transactional
@@ -38,7 +38,7 @@ class ActivityDataJpaRepositoryIntegrationTest {
         //when
 //        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
 //        activityModel.chooseActivityType(savedActivityTypeModel);
-        ActivityModel savedActivityModel = activityDataJpaRepository.save(activityModel);
+        ActivityModel savedActivityModel = defaultActivityDataJpaRepository.save(activityModel);
 
         //then
         Assertions.assertNotNull(savedActivityModel, "savedActivityModel is null");

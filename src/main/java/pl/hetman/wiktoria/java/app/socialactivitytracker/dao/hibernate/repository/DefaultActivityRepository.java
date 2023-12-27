@@ -13,12 +13,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 @Component
-public class ActivityRepository implements Repository<ActivityModel> {
+public class DefaultActivityRepository implements DefaultRepository<ActivityModel> {
 
     //analogicznie do ActivityDao, tylko z hibernate
     //dla frameworkow sa repository (tu dla springa), dla innych dao
 
-    private static final Logger LOGGER = Logger.getLogger(ActivityRepository.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DefaultActivityRepository.class.getName());
     private static final SessionFactory SESSION_FACTORY;
 
     static {

@@ -5,7 +5,7 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityE
 import java.util.List;
 import java.util.Optional;
 
-public interface Repository <T>{
+public interface DefaultRepository<T>{
 
     Optional<T> create(T t) throws ActivityException;
 

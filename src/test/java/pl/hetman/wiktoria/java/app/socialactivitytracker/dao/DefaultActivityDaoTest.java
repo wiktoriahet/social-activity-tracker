@@ -4,16 +4,16 @@ import org.junit.jupiter.api.Test;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.ActivityDao;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.DefaultActivityDao;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.UserDao;
 
-class ActivityDaoTest {
+class DefaultActivityDaoTest {
 
     @Test
     void save() throws ActivityException {
         //given
         UserDao userDao = new UserDao();
-        ActivityDao activityDao = new ActivityDao(userDao);
+        DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
 
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
         activityTypeModel.setName("swimming");
@@ -26,7 +26,7 @@ class ActivityDaoTest {
         activityModel.setLabel("today's swimming");
 
         //when
-        activityDao.create(activityModel);
+        defaultActivityDao.create(activityModel);
 
         //then
 
@@ -36,7 +36,7 @@ class ActivityDaoTest {
     void saveWithDuration() throws ActivityException {
         //given
         UserDao userDao = new UserDao();
-        ActivityDao activityDao = new ActivityDao(userDao);
+        DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
 
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
         activityTypeModel.setName("running");
@@ -51,7 +51,7 @@ class ActivityDaoTest {
         activityModel.setLabel("today's running");
 
         //when
-        activityDao.create(activityModel);
+        defaultActivityDao.create(activityModel);
 
         //then
 
@@ -61,7 +61,7 @@ class ActivityDaoTest {
     void update() throws ActivityException{
         //given
         UserDao userDao = new UserDao();
-        ActivityDao activityDao = new ActivityDao(userDao);
+        DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
 
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
         activityTypeModel.setName("flying");
@@ -76,7 +76,7 @@ class ActivityDaoTest {
         activityModel.setLabel("today's flying");
 
         //when
-        activityDao.update(activityModel);
+        defaultActivityDao.update(activityModel);
 
         //then
 
@@ -87,10 +87,10 @@ class ActivityDaoTest {
         //given
         ActivityModel activityModel = new ActivityModel();
         UserDao userDao = new UserDao();
-        ActivityDao activityDao = new ActivityDao(userDao);
+        DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
         activityModel.setId(1L);
         //when
-        activityDao.delete(activityModel);
+        defaultActivityDao.delete(activityModel);
 
         //then
 

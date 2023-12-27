@@ -5,28 +5,28 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.ActivityRepository;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.DefaultActivityRepository;
 
 import java.util.Optional;
 
 @SpringBootTest
-class ActivityRepositoryIntegrationTest {
+class DefaultActivityRepositoryIntegrationTest {
 
     private static final String ACTIVITY_LABEL_RUNNING = "Running";
     private static final String ACTIVITY_LABEL_KAYAKING = "Kayaking";
 
     @Autowired
-    private ActivityRepository activityRepository;
+    private DefaultActivityRepository defaultActivityRepository;
 
     @Test
     void createAndRead(){
         //given
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_LABEL_KAYAKING);
-        Optional<ActivityModel> createdActivityModel = activityRepository.create(activityModel);
+        Optional<ActivityModel> createdActivityModel = defaultActivityRepository.create(activityModel);
 
         //when
-        Optional<ActivityModel> readActivityModel = activityRepository.read(createdActivityModel.get().getId());
+        Optional<ActivityModel> readActivityModel = defaultActivityRepository.read(createdActivityModel.get().getId());
 
         //then
         Assertions.assertNotNull(readActivityModel, "readActivityModel is null");
@@ -44,9 +44,9 @@ class ActivityRepositoryIntegrationTest {
         updateActivityModel.setLabel(ACTIVITY_LABEL_KAYAKING);
 
         //when
-        Optional<ActivityModel> optionalCreatedActivityModel = activityRepository.create(createActivityModel);
+        Optional<ActivityModel> optionalCreatedActivityModel = defaultActivityRepository.create(createActivityModel);
         updateActivityModel.setId(optionalCreatedActivityModel.get().getId());
-        Optional<ActivityModel> updatedActivityModel = activityRepository.update(updateActivityModel);
+        Optional<ActivityModel> updatedActivityModel = defaultActivityRepository.update(updateActivityModel);
 
         //then
         Assertions.assertAll(
@@ -63,10 +63,10 @@ class ActivityRepositoryIntegrationTest {
         //given
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_LABEL_KAYAKING);
-        Optional<ActivityModel> optionalCreatedActivityModel = activityRepository.create(activityModel);
+        Optional<ActivityModel> optionalCreatedActivityModel = defaultActivityRepository.create(activityModel);
 
         //when
-        boolean deletedActivityRepository = activityRepository.delete(optionalCreatedActivityModel.get());
+        boolean deletedActivityRepository = defaultActivityRepository.delete(optionalCreatedActivityModel.get());
 
         //then
         Assertions.assertEquals(true, deletedActivityRepository, "Is false");

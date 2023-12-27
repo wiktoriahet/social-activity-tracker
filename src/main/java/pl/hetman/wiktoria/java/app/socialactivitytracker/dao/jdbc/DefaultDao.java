@@ -5,7 +5,7 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityE
 import java.util.List;
 import java.util.Optional;
 
-public interface Dao<T> {
+public interface DefaultDao<T> {
 
     Optional<T> create(T t) throws ActivityException;
 

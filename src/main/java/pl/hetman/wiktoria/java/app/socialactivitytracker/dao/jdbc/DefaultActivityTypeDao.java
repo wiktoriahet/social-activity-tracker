@@ -6,9 +6,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-public class ActivityTypeDao implements Dao<ActivityModel>{
+public class DefaultActivityTypeDao implements DefaultDao<ActivityModel> {
 
-    private static final Logger LOGGER = Logger.getLogger(ActivityTypeDao.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DefaultActivityTypeDao.class.getName());
 
     @Override
     public Optional<ActivityModel> create(ActivityModel activityModel) {

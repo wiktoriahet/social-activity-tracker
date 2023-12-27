@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.logging.Logger;
 
 @Component
-public class UserDao implements Dao<UserModel> {
+public class UserDao implements DefaultDao<UserModel> {
 
     private static final Logger LOGGER = Logger.getLogger(UserDao.class.getName());
 

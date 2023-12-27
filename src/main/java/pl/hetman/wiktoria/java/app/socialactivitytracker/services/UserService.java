@@ -1,7 +1,7 @@
 package pl.hetman.wiktoria.java.app.socialactivitytracker.services;
 
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.ActivityRepository;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.hibernate.repository.DefaultActivityRepository;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -15,10 +15,10 @@ public class UserService {
 //        this.activityDao = activityDao;
 //    }
 
-    private final ActivityRepository activityRepository;
+    private final DefaultActivityRepository defaultActivityRepository;
 
-    public UserService(ActivityRepository activityRepository) {
-        this.activityRepository = activityRepository;
+    public UserService(DefaultActivityRepository defaultActivityRepository) {
+        this.defaultActivityRepository = defaultActivityRepository;
     }
 
     // C - create
