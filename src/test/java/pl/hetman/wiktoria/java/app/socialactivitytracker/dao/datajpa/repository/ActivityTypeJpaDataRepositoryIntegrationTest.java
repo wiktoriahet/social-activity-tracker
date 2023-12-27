@@ -15,7 +15,7 @@ public class ActivityTypeJpaDataRepositoryIntegrationTest {
     private static final String ACTIVITY_NAME_SNORKELING = "Snorkeling";
 
     @Autowired
-    private ActivityTypeDataJpaRepository activityTypeDataJpaRepository;
+    private DefaultActivityTypeDataJpaRepository defaultActivityTypeDataJpaRepository;
 
     @Test
     public void delete(){
@@ -25,10 +25,10 @@ public class ActivityTypeJpaDataRepositoryIntegrationTest {
         activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
 
         //when
-        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
-        activityTypeDataJpaRepository.delete(savedActivityTypeModel);
+        ActivityTypeModel savedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(activityTypeModel);
+        defaultActivityTypeDataJpaRepository.delete(savedActivityTypeModel);
         Optional<ActivityTypeModel> optionalReadActivityTypeModel =
-                activityTypeDataJpaRepository.findById(savedActivityTypeModel.getId());
+                defaultActivityTypeDataJpaRepository.findById(savedActivityTypeModel.getId());
         ActivityTypeModel readActivityTypeModel = optionalReadActivityTypeModel.orElse(null);
 
 

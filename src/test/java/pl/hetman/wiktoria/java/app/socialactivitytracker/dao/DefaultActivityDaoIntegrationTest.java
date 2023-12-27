@@ -5,12 +5,12 @@ import org.junit.jupiter.api.Test;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.ActivityDao;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.DefaultActivityDao;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.UserDao;
 
 import java.util.Optional;
 
-class ActivityDaoIntegrationTest {
+class DefaultActivityDaoIntegrationTest {
 
     public static final long ACTIVITY_MODEL_ID_55 = 55L;
     public static final String ACTIVITY_MODEL_LABEL_KAYAK = "today's kayaking";
@@ -19,10 +19,10 @@ class ActivityDaoIntegrationTest {
    void read() throws ActivityException{
        //given
         UserDao userDao = new UserDao();
-        ActivityDao activityDao = new ActivityDao(userDao);
+        DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
 
         //when
-        Optional<ActivityModel> readActivityModel = activityDao.read(-99L);
+        Optional<ActivityModel> readActivityModel = defaultActivityDao.read(-99L);
 
         //then
         Assertions.assertNotNull(readActivityModel, "activityModel is not null");
@@ -33,14 +33,14 @@ class ActivityDaoIntegrationTest {
     void createAndRead() throws ActivityException {
         //given
         UserDao userDao = new UserDao();
-        ActivityDao activityDao = new ActivityDao(userDao);
+        DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_MODEL_LABEL_KAYAK);
 
         //when
 
-        Optional<ActivityModel> savedActivityModel = activityDao.create(activityModel);
-        Optional<ActivityModel> readActivityModel = activityDao.read(savedActivityModel.get().getId());
+        Optional<ActivityModel> savedActivityModel = defaultActivityDao.create(activityModel);
+        Optional<ActivityModel> readActivityModel = defaultActivityDao.read(savedActivityModel.get().getId());
         System.out.println(readActivityModel);
 
         //then
@@ -56,7 +56,7 @@ class ActivityDaoIntegrationTest {
 
         //utworzona aktywność do zapisania
         UserDao userDao = new UserDao();
-        ActivityDao activityDao = new ActivityDao(userDao);
+        DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
 
         activityTypeModel.setName("walking");
@@ -71,7 +71,7 @@ class ActivityDaoIntegrationTest {
         activityModel.duration();
         activityModel.setLabel("today's walking");
 
-        activityDao.create(activityModel);
+        defaultActivityDao.create(activityModel);
 
         //dane do modyfikacji
         activityTypeModel.setName("jogging");
@@ -82,7 +82,7 @@ class ActivityDaoIntegrationTest {
         activityModel.duration();
 
         //when
-        activityDao.update(activityModel);
+        defaultActivityDao.update(activityModel);
 
         //then
 
@@ -94,7 +94,7 @@ class ActivityDaoIntegrationTest {
         //utworzona aktywność do usunięcia
         ActivityModel activityModel = new ActivityModel();
         UserDao userDao = new UserDao();
-        ActivityDao activityDao = new ActivityDao(userDao);
+        DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
 
         activityTypeModel.setName("flying");
@@ -107,10 +107,10 @@ class ActivityDaoIntegrationTest {
         activityModel.duration();
         activityModel.setLabel("today's flying");
 
-        activityDao.create(activityModel);
+        defaultActivityDao.create(activityModel);
 
         //when
-        activityDao.delete(activityModel);
+        defaultActivityDao.delete(activityModel);
 
         //then
     }

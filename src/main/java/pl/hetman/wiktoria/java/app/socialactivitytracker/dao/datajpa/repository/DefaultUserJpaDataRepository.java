@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
 
 @Repository
-public interface UserJpaDataRepository extends JpaRepository<UserModel, Long> {
+public interface DefaultUserJpaDataRepository extends JpaRepository<UserModel, Long> {
 }

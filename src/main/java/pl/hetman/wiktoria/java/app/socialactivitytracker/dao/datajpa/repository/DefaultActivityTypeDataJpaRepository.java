@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityTypeModel;
 
 @Repository
-public interface ActivityTypeDataJpaRepository extends JpaRepository<ActivityTypeModel, Long> {
+public interface DefaultActivityTypeDataJpaRepository extends JpaRepository<ActivityTypeModel, Long> {
 }

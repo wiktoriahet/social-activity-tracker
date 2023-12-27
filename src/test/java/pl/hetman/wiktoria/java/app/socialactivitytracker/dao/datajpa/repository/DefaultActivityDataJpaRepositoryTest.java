@@ -10,7 +10,7 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.Activi
 import java.time.LocalDateTime;
 
 @SpringBootTest
-class ActivityDataJpaRepositoryTest {
+class DefaultActivityDataJpaRepositoryTest {
 
     private static final String ACTIVITY_LABEL_FISHING = "Fishing";
     private static final String ACTIVITY_NAME_FISHING = "Fishing on Friday";
@@ -18,7 +18,7 @@ class ActivityDataJpaRepositoryTest {
     private static final String ACTIVITY_LABEL_SNORKELING = "Snorkeling";
 
     @Autowired
-    private ActivityDataJpaRepository activityDataJpaRepository;
+    private DefaultActivityDataJpaRepository defaultActivityDataJpaRepository;
 
     @Test
     public void create() {
@@ -28,7 +28,7 @@ class ActivityDataJpaRepositoryTest {
         activityModel.setStop(LocalDateTime.now());
 
         //when
-        ActivityModel savedActivityModel = activityDataJpaRepository.save(activityModel);
+        ActivityModel savedActivityModel = defaultActivityDataJpaRepository.save(activityModel);
 
         //then
         Assertions.assertNotNull(savedActivityModel, "savedActivityModel is null");
@@ -48,7 +48,7 @@ class ActivityDataJpaRepositoryTest {
         activityModel.chooseActivityType(activityTypeModel);
 
         //when
-        ActivityModel savedActivityModel = activityDataJpaRepository.save(activityModel);
+        ActivityModel savedActivityModel = defaultActivityDataJpaRepository.save(activityModel);
 
         //then
         Assertions.assertNotNull(savedActivityModel, "savedActivityModel is null");
@@ -66,10 +66,10 @@ class ActivityDataJpaRepositoryTest {
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_LABEL_FISHING);
         activityModel.setStop(LocalDateTime.now());
-        ActivityModel savedActivityModel = activityDataJpaRepository.save(activityModel);
+        ActivityModel savedActivityModel = defaultActivityDataJpaRepository.save(activityModel);
 
         //when
-        ActivityModel readActivityModel = activityDataJpaRepository.getReferenceById(savedActivityModel.getId());
+        ActivityModel readActivityModel = defaultActivityDataJpaRepository.getReferenceById(savedActivityModel.getId());
 
         //then
         Assertions.assertNotNull(readActivityModel, "readActivityModel is null");
@@ -82,13 +82,13 @@ class ActivityDataJpaRepositoryTest {
         ActivityModel activityModel = new ActivityModel();
         activityModel.setLabel(ACTIVITY_LABEL_FISHING);
         activityModel.setStop(LocalDateTime.now());
-        ActivityModel savedActivityModel = activityDataJpaRepository.save(activityModel);
+        ActivityModel savedActivityModel = defaultActivityDataJpaRepository.save(activityModel);
         ActivityModel updateActivityModel = new ActivityModel();
         updateActivityModel.setLabel(ACTIVITY_LABEL_FISHING);
         updateActivityModel.setId(savedActivityModel.getId());
 
         //when
-        ActivityModel updatedActivityModel = activityDataJpaRepository.save(updateActivityModel);
+        ActivityModel updatedActivityModel = defaultActivityDataJpaRepository.save(updateActivityModel);
 
         //then
         Assertions.assertNotNull(updatedActivityModel, "updatedActivityModel is null");

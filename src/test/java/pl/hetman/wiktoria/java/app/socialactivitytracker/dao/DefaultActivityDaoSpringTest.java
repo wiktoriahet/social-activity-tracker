@@ -6,15 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.api.exception.ActivityException;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.ActivityModel;
-import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.ActivityDao;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.DefaultActivityDao;
 
 import java.util.Optional;
 
 @SpringBootTest
-class ActivityDaoSpringTest {
+class DefaultActivityDaoSpringTest {
 
     @Autowired
-    private ActivityDao activityDao;
+    private DefaultActivityDao defaultActivityDao;
 
     @Test
     void read() throws ActivityException {
@@ -22,7 +22,7 @@ class ActivityDaoSpringTest {
         ActivityModel activityModel = new ActivityModel();
 
         //when
-        Optional<ActivityModel> optionalActivityModel = activityDao.read(1L);
+        Optional<ActivityModel> optionalActivityModel = defaultActivityDao.read(1L);
 
         //then
         Assertions.assertNotNull(optionalActivityModel, "optionalActivityModel is null");

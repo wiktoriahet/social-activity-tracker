@@ -9,13 +9,13 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.Activi
 import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.UserModel;
 
 @SpringBootTest
-class UserJpaDataRepositoryIntegrationTest {
+class DefaultUserJpaDataRepositoryIntegrationTest {
 
     private static final String ACTIVITY_NAME_FISHING = "Fishing";
     private static final String ACTIVITY_NAME_SNORKELING = "Snorkeling";
 
     @Autowired
-    private UserJpaDataRepository userJpaDataRepository;
+    private DefaultUserJpaDataRepository defaultUserJpaDataRepository;
 
     @Test
 //    @Transactional
@@ -35,7 +35,7 @@ class UserJpaDataRepositoryIntegrationTest {
         userModel.addActivity(fishingActivityModel);
 
         //when
-        UserModel savedUserModel = userJpaDataRepository.save(userModel);
+        UserModel savedUserModel = defaultUserJpaDataRepository.save(userModel);
 
         //then
         Assertions.assertAll(

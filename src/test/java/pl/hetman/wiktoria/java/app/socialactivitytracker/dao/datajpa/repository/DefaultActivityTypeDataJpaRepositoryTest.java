@@ -9,13 +9,13 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.controller.model.Activi
 import java.util.Optional;
 
 @SpringBootTest
-class ActivityTypeDataJpaRepositoryTest {
+class DefaultActivityTypeDataJpaRepositoryTest {
 
     private static final String ACTIVITY_NAME_FISHING = "Fishing";
     private static final String ACTIVITY_NAME_SNORKELING = "Snorkeling";
 
     @Autowired
-    private ActivityTypeDataJpaRepository activityTypeDataJpaRepository;
+    private DefaultActivityTypeDataJpaRepository defaultActivityTypeDataJpaRepository;
 
     @Test
     public void create() {
@@ -25,7 +25,7 @@ class ActivityTypeDataJpaRepositoryTest {
         activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
 
         //when
-        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
+        ActivityTypeModel savedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(activityTypeModel);
 
         //then
         Assertions.assertNotNull(savedActivityTypeModel, "savedActivityTypeModel is null");
@@ -38,10 +38,10 @@ class ActivityTypeDataJpaRepositoryTest {
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
         activityTypeModel.setCustom(true);
         activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
-        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
+        ActivityTypeModel savedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(activityTypeModel);
 
         //when
-        Optional<ActivityTypeModel> readActivityTypeModel = activityTypeDataJpaRepository.findById(savedActivityTypeModel.getId());
+        Optional<ActivityTypeModel> readActivityTypeModel = defaultActivityTypeDataJpaRepository.findById(savedActivityTypeModel.getId());
 
         //then
         Assertions.assertNotNull(readActivityTypeModel, "readActivityTypeModel is null");
@@ -54,13 +54,13 @@ class ActivityTypeDataJpaRepositoryTest {
         ActivityTypeModel activityTypeModel = new ActivityTypeModel();
         activityTypeModel.setCustom(true);
         activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
-        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
+        ActivityTypeModel savedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(activityTypeModel);
         ActivityTypeModel updateActivityTypeModel = new ActivityTypeModel();
         updateActivityTypeModel.setName(ACTIVITY_NAME_FISHING);
         updateActivityTypeModel.setId(savedActivityTypeModel.getId());
 
         //when
-        ActivityTypeModel updatedActivityTypeModel = activityTypeDataJpaRepository.save(updateActivityTypeModel);
+        ActivityTypeModel updatedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(updateActivityTypeModel);
 
         //then
         Assertions.assertNotNull(updatedActivityTypeModel, "updatedActivityTypeModel is null");
@@ -76,8 +76,8 @@ class ActivityTypeDataJpaRepositoryTest {
         activityTypeModel.setName(ACTIVITY_NAME_SNORKELING);
 
         //when
-        ActivityTypeModel savedActivityTypeModel = activityTypeDataJpaRepository.save(activityTypeModel);
-        activityTypeDataJpaRepository.delete(savedActivityTypeModel);
+        ActivityTypeModel savedActivityTypeModel = defaultActivityTypeDataJpaRepository.save(activityTypeModel);
+        defaultActivityTypeDataJpaRepository.delete(savedActivityTypeModel);
 
         //then
         //Assertions.assertNull(savedActivityTypeModel, "savedActivityTypeModel is not null");

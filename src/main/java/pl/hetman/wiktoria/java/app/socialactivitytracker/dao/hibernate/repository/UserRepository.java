@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-public class UserRepository implements Repository<ActivityModel> {
+public class UserRepository implements DefaultRepository<ActivityModel> {
 
     private static final Logger LOGGER = Logger.getLogger(UserRepository.class.getName());
     private static final SessionFactory SESSION_FACTORY;

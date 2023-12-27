@@ -10,7 +10,7 @@ import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.jdbc.UserDao;
 import java.util.Optional;
 
 @SpringBootTest
-class UserDaoSpringTest {
+class DefaultUserDaoSpringTest {
 
     @Autowired
     private UserDao userDao;

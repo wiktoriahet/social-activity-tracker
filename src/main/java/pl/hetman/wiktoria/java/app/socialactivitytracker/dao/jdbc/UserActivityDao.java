@@ -9,11 +9,11 @@ import java.util.Optional;
 
 public class UserActivityDao {
     private final UserDao userDao;
-    private final ActivityDao activityDao;
+    private final DefaultActivityDao defaultActivityDao;
 
-    public UserActivityDao(UserDao userDao, ActivityDao activityDao) {
+    public UserActivityDao(UserDao userDao, DefaultActivityDao defaultActivityDao) {
         this.userDao = userDao;
-        this.activityDao = activityDao;
+        this.defaultActivityDao = defaultActivityDao;
     }
 
     public void create(Long userId) throws ActivityException, UserException {
@@ -24,6 +24,6 @@ public class UserActivityDao {
         ActivityModel activityModel = new ActivityModel();
 //        activityModel.setUser(userModel);
 
-        activityDao.create(activityModel);
+        defaultActivityDao.create(activityModel);
     }
 }
