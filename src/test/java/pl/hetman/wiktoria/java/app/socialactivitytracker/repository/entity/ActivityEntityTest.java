@@ -3,37 +3,40 @@ package pl.hetman.wiktoria.java.app.socialactivitytracker.repository.entity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import pl.hetman.wiktoria.java.app.socialactivitytracker.dao.entity.ActivityEntity;
+import pl.hetman.wiktoria.java.app.socialactivitytracker.web.controller.model.ActivityModel;
 
 import java.time.LocalDateTime;
 import java.time.Month;
 
 class ActivityEntityTest {
-    // TODO: 10.07.2023 poprawione LocalDateTime z ActivityModel
+    // TODO: 10.07.2023 poprawione LocalDateTime z ActivityModel [x]
+    //todo refactor na activity model [x]
+    //todo zrobić wspólny interfejs dao dla wszystkiego w dao
     @Test
     void begin() {
         //given
-        ActivityEntity activityEntity = new ActivityEntity();
+        ActivityModel activityModel = new ActivityModel();
 
         //when
-        activityEntity.begin();
+        activityModel.begin();
 
         //then
         //Assertions.assertNotNull(activityModel.start, "activity start is null");
-        Assertions.assertNotNull(activityEntity.getStart(), "activity start is null");
+        Assertions.assertNotNull(activityModel.getStart(), "activity start is null");
 
     }
 
     @Test
     void end() {
         //given
-        ActivityEntity activityEntity = new ActivityEntity();
+        ActivityModel activityModel = new ActivityModel();
 
         //when
-        activityEntity.end();
+        activityModel.end();
 
         //then
         //Assertions.assertNotNull(activityModel.stop, "activity stop is null");
-        Assertions.assertNotNull(activityEntity.getStop(), "activity stop is null");
+        Assertions.assertNotNull(activityModel.getStop(), "activity stop is null");
 
 
     }

@@ -14,7 +14,7 @@ class DefaultActivityDaoListTest {
     @Test
     void list() throws ActivityException {
         //given
-        // TODO: 10.07.2023 poprawiony test dla userDao?
+        // TODO: 10.07.2023 poprawiony test dla userDao?[x]
         UserDao userDao = new UserDao();
         DefaultActivityDao defaultActivityDao = new DefaultActivityDao(userDao);
 
